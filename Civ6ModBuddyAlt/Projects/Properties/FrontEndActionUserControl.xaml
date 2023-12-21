@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="Civ6ModBuddyAlt.Projects.Properties.FrontEndActionUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Civ6ModBuddyAlt.Projects.Properties"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DockPanel>
+            <TextBlock
+                DockPanel.Dock="Top"
+                HorizontalAlignment="Left"
+                Margin="10"
+                TextBlock.TextWrapping="Wrap"
+                TextBlock.Text="FrontEnd actions are steps the mod takes during the setup phase of the game when the mod is enabled.  These actions are useful for providing new setup options such as adding a ruleset or adding a map option."
+                VerticalAlignment="Top"
+                TextBlock.FontSize="16" />
+            <DockPanel Dock="Bottom">
+                <Grid DockPanel.Dock="Left" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition ColumnDefinition.Width="auto" />
+                        <ColumnDefinition ColumnDefinition.Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <ListView Name="listActions" Grid.Column="0" Width="300" ItemsControl.ItemsSource="{Binding Path=Actions}" SelectedItem="{Binding Path=SelectedAction, Mode=TwoWay}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn GridViewColumn.Header="Type" Width="100" DisplayMemberBinding="{Binding Type}" />
+                                <GridViewColumn GridViewColumn.Header="Id" Width="180" DisplayMemberBinding="{Binding Id}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel Grid.Column="1">
+                        <Button
+                            Name="buttonAddAction"
+                            ContentControl.Content="Add Action"
+                            FrameworkElement.Width="100"
+                            FrameworkElement.Margin="2"
+                            Click="buttonAddAction_Click" />
+                        <Button
+                            Name="buttonRemoveAction"
+                            ContentControl.Content="Remove Action"
+                            FrameworkElement.Width="100"
+                            FrameworkElement.Margin="2"
+                            Click="buttonRemoveAction_Click" />
+                    </StackPanel>
+                </Grid>
+                <ScrollViewer DockPanel.Dock="Right" Height="Auto" Width="Auto">
+                    <local:FrontEndActionEditor Height="Auto" Width="Auto" Margin="10" DataContext="{Binding SelectedAction}">
+                        <FrameworkElement.Style>
+                            <Style TargetType="{x:Type local:FrontEndActionEditor}">
+                                <Setter Property="UIElement.Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding}"  Value="{x:Null}">
+                                        <Setter Property="UIElement.Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </FrameworkElement.Style>
+                    </local:FrontEndActionEditor>
+                </ScrollViewer>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

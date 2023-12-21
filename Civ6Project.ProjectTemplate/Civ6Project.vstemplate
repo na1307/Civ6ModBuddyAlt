@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Civilization VI Mod</Name>
+    <Description>A Civilization 6 mod containing no generated items.</Description>
+    <Icon>Civ6Project.ico</Icon>
+    <ProjectType>Civ6ModProject</ProjectType>
+    <SortOrder>1</SortOrder>
+    <TemplateID>{218ece62-33c4-4cea-957a-3c97e521840e}</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Civ6Mod</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <CreateInPlace>true</CreateInPlace>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="Civ6Project.civ6proj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.Art.xml">Civ6Project.Art.xml</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>Civ6ModBuddyAlt, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5f7258823af0f1cc</Assembly>
+    <FullClassName>Civ6ModBuddyAlt.Projects.Wizards.BasicNewModWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

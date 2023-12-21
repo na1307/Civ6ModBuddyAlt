@@ -1,0 +1,250 @@
+﻿<UserControl x:Class="Civ6ModBuddyAlt.Projects.Properties.InGameActionEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Civ6ModBuddyAlt.Projects.Properties"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                ColumnDefinition.Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                RowDefinition.Height="Auto" />
+            <RowDefinition
+                RowDefinition.Height="Auto" />
+            <RowDefinition
+                RowDefinition.Height="Auto" />
+            <RowDefinition
+                RowDefinition.Height="Auto" />
+            <RowDefinition
+                RowDefinition.Height="Auto" />
+            <RowDefinition
+                RowDefinition.Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            ContentControl.Content="ID:"
+            FrameworkElement.HorizontalAlignment="Right"
+            FrameworkElement.VerticalAlignment="Top" />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            TextWrapping="Wrap"
+            FrameworkElement.VerticalAlignment="Center"
+            TextBox.Text="{Binding Id, Mode=TwoWay}" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="0"
+            ContentControl.Content="Type:"
+            FrameworkElement.HorizontalAlignment="Right"
+            FrameworkElement.VerticalAlignment="Top" />
+        <ComboBox
+            Grid.Row="1"
+            Grid.Column="1"
+            FrameworkElement.VerticalAlignment="Center"
+            IsEditable="True"
+            SelectedValuePath="Content"
+            SelectedValue="{Binding Type, Mode=TwoWay}">
+            <ComboBoxItem x:Name="AddGameplayScripts">AddGameplayScripts</ComboBoxItem>
+            <ComboBoxItem x:Name="AddUserInterfaces">AddUserInterfaces</ComboBoxItem>
+            <ComboBoxItem x:Name="ImportFiles">ImportFiles</ComboBoxItem>
+            <ComboBoxItem x:Name="ReplaceUIScript">ReplaceUIScript</ComboBoxItem>
+            <ComboBoxItem x:Name="UpdateArt">UpdateArt</ComboBoxItem>
+            <ComboBoxItem x:Name="UpdateAudio">UpdateAudio</ComboBoxItem>
+            <ComboBoxItem x:Name="UpdateColors">UpdateColors</ComboBoxItem>
+            <ComboBoxItem x:Name="UpdateDatabase">UpdateDatabase</ComboBoxItem>
+            <ComboBoxItem x:Name="UpdateIcons">UpdateIcons</ComboBoxItem>
+            <ComboBoxItem x:Name="UpdateLogitechARX">UpdateLogitechARX</ComboBoxItem>
+            <ComboBoxItem x:Name="UpdateText">UpdateText</ComboBoxItem>
+            <ComboBoxItem x:Name="DoNothing">DoNothing</ComboBoxItem>
+        </ComboBox>
+        <Expander
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HeaderedContentControl.Header="Custom Properties"
+            FrameworkElement.HorizontalAlignment="Stretch"
+            FrameworkElement.VerticalAlignment="Top">
+            <Grid>
+                <DockPanel>
+                    <StackPanel
+                        DockPanel.Dock="Right">
+                        <Button
+                            Name="buttonAddProperty"
+                            ContentControl.Content="Add"
+                            FrameworkElement.HorizontalAlignment="Left"
+                            FrameworkElement.Margin="2"
+                            FrameworkElement.VerticalAlignment="Top"
+                            FrameworkElement.Width="75"
+                            Click="buttonAddProperty_Click" />
+                        <Button
+                            Name="buttonRemoveProperty"
+                            ContentControl.Content="Remove"
+                            FrameworkElement.HorizontalAlignment="Left"
+                            FrameworkElement.Margin="2"
+                            FrameworkElement.VerticalAlignment="Top"
+                            FrameworkElement.Width="75"
+                            Click="buttonRemoveProperty_Click" />
+                    </StackPanel>
+                    <ListView
+                        Name="listProperties"
+                        DockPanel.Dock="Left"
+                        FrameworkElement.MinHeight="300"
+                        ItemsControl.ItemsSource="{Binding Properties}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn
+                                    GridViewColumn.Header="Name"
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding Name}" />
+                                <GridViewColumn
+                                    GridViewColumn.Header="Value"
+                                    Width="200"
+                                    DisplayMemberBinding="{Binding Value}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </Grid>
+        </Expander>
+        <Expander
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HeaderedContentControl.Header="Criteria"
+            FrameworkElement.HorizontalAlignment="Stretch"
+            FrameworkElement.VerticalAlignment="Top">
+            <Grid>
+                <DockPanel>
+                    <StackPanel
+                        DockPanel.Dock="Right">
+                        <Button
+                            Name="buttonAddCriteria"
+                            ContentControl.Content="Add"
+                            FrameworkElement.HorizontalAlignment="Left"
+                            FrameworkElement.Margin="2"
+                            FrameworkElement.VerticalAlignment="Top"
+                            FrameworkElement.Width="75"
+                            Click="buttonAddCriteria_Click" />
+                        <Button
+                            Name="buttonRemoveCriteria"
+                            ContentControl.Content="Remove"
+                            FrameworkElement.HorizontalAlignment="Left"
+                            FrameworkElement.Margin="2"
+                            FrameworkElement.VerticalAlignment="Top"
+                            FrameworkElement.Width="75"
+                            Click="buttonRemoveCriteria_Click" />
+                    </StackPanel>
+                    <ListBox
+                        Name="listCriteria"
+                        DockPanel.Dock="Left"
+                        FrameworkElement.MinHeight="300"
+                        ItemsControl.ItemsSource="{Binding Criteria}" />
+                </DockPanel>
+            </Grid>
+        </Expander>
+        <Expander
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HeaderedContentControl.Header="References"
+            FrameworkElement.HorizontalAlignment="Stretch"
+            FrameworkElement.VerticalAlignment="Top">
+            <Grid>
+                <DockPanel>
+                    <StackPanel
+                        DockPanel.Dock="Right">
+                        <Button
+                            Name="buttonAddReference"
+                            ContentControl.Content="Add"
+                            FrameworkElement.HorizontalAlignment="Left"
+                            FrameworkElement.Margin="2"
+                            FrameworkElement.VerticalAlignment="Top"
+                            FrameworkElement.Width="75"
+                            Click="buttonAddReference_Click" />
+                        <Button
+                            Name="buttonEditReference"
+                            ContentControl.Content="Edit"
+                            FrameworkElement.HorizontalAlignment="Left"
+                            FrameworkElement.Margin="2"
+                            FrameworkElement.VerticalAlignment="Top"
+                            FrameworkElement.Width="75"
+                            Click="buttonEditReference_Click" />
+                        <Button
+                            Name="buttonRemoveReference"
+                            ContentControl.Content="Remove"
+                            FrameworkElement.HorizontalAlignment="Left"
+                            FrameworkElement.Margin="2"
+                            FrameworkElement.VerticalAlignment="Top"
+                            FrameworkElement.Width="75"
+                            Click="buttonRemoveReference_Click" />
+                    </StackPanel>
+                    <ListView
+                        Name="listReferences"
+                        DockPanel.Dock="Left"
+                        FrameworkElement.MinHeight="300"
+                        ItemsControl.ItemsSource="{Binding References}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn
+                                    GridViewColumn.Header="Type"
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding Type}" />
+                                <GridViewColumn
+                                    GridViewColumn.Header="Mod Id"
+                                    Width="200"
+                                    DisplayMemberBinding="{Binding ModId}" />
+                                <GridViewColumn
+                                    GridViewColumn.Header="Action Id"
+                                    Width="200"
+                                    DisplayMemberBinding="{Binding ActionId}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </Grid>
+        </Expander>
+        <Expander
+            Grid.Row="5"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HeaderedContentControl.Header="Files"
+            FrameworkElement.HorizontalAlignment="Stretch"
+            FrameworkElement.VerticalAlignment="Top"
+            IsExpanded="True">
+            <DockPanel>
+                <StackPanel
+                    DockPanel.Dock="Right">
+                    <Button
+                        Name="buttonAddFile"
+                        ContentControl.Content="Add"
+                        FrameworkElement.HorizontalAlignment="Left"
+                        FrameworkElement.Margin="2"
+                        FrameworkElement.VerticalAlignment="Top"
+                        FrameworkElement.Width="75"
+                        Click="buttonAddFile_Click" />
+                    <Button
+                        Name="buttonRemoveFile"
+                        ContentControl.Content="Remove"
+                        FrameworkElement.HorizontalAlignment="Left"
+                        FrameworkElement.Margin="2"
+                        FrameworkElement.VerticalAlignment="Top"
+                        FrameworkElement.Width="75"
+                        Click="buttonRemoveFile_Click" />
+                </StackPanel>
+                <ListBox
+                    Name="listFiles"
+                    DockPanel.Dock="Left"
+                    FrameworkElement.MinHeight="300"
+                    DisplayMemberPath="File"
+                    ItemsControl.ItemsSource="{Binding Files}" />
+            </DockPanel>
+        </Expander>
+    </Grid>
+</UserControl>

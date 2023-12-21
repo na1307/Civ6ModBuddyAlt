@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name>Civilization VI XML</Name>
+    <Description>An Xml file used to update the Civ6 gameplay database.</Description>
+    <Icon>Civ6Xml.ico</Icon>
+    <TemplateID>d36b012d-575c-4db8-8523-d81bbc02ec2d</TemplateID>
+    <ProjectType>Civ6ModProject</ProjectType>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>GameData.xml</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectItem ReplaceParameters="true">Civ6Xml.xml</ProjectItem>
+  </TemplateContent>
+</VSTemplate>
