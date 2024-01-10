@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Civ6Xml.ItemTemplate", "Civ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Civ6Text.ItemTemplate", "Civ6Text.ItemTemplate\Civ6Text.ItemTemplate.csproj", "{B6A1DA66-23D2-47C8-9D37-A23F1F1A2759}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Project.17.0", "Microsoft.VisualStudio.Project\Microsoft.VisualStudio.Project.17.0.csproj", "{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,18 +83,6 @@ Global
 		{B6A1DA66-23D2-47C8-9D37-A23F1F1A2759}.Release|arm64.Build.0 = Release|arm64
 		{B6A1DA66-23D2-47C8-9D37-A23F1F1A2759}.Release|x86.ActiveCfg = Release|x86
 		{B6A1DA66-23D2-47C8-9D37-A23F1F1A2759}.Release|x86.Build.0 = Release|x86
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Debug|arm64.Build.0 = Debug|Any CPU
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Debug|x86.Build.0 = Debug|Any CPU
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Release|arm64.ActiveCfg = Release|Any CPU
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Release|arm64.Build.0 = Release|Any CPU
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Release|x86.ActiveCfg = Release|Any CPU
-		{2536C32B-1F57-4A7D-B98B-A74A840EAEB6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

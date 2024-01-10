@@ -155,6 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Build" />
+    <Reference Include="Microsoft.VisualStudio.Project.17.0">
+      <HintPath>.\Microsoft.VisualStudio.Project.17.0.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=17.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -225,10 +228,6 @@
       <VSIXSubPath>ItemTemplates</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
-    </ProjectReference>
-    <ProjectReference Include="..\Microsoft.VisualStudio.Project\Microsoft.VisualStudio.Project.17.0.csproj">
-      <Project>{2536c32b-1f57-4a7d-b98b-a74a840eaeb6}</Project>
-      <Name>Microsoft.VisualStudio.Project.17.0</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
