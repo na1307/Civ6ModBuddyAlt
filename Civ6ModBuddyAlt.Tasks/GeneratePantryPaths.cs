@@ -80,7 +80,7 @@ public class GeneratePantryPaths : Microsoft.Build.Utilities.Task {
                     stringBuilder.Append(string.Format(" \"{0}\"", text6));
                     ParseArtXml(text7, ref queue);
                 } else {
-                    string.Format("Could not find art xml. {0} - {1}", gameArtId.Name, gameArtId.Id);
+                    throw new FileNotFoundException(string.Format("Could not find art xml. {0} - {1}", gameArtId.Name, gameArtId.Id));
                 }
             }
         }

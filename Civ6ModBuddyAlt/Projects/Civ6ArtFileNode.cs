@@ -48,7 +48,7 @@ public class Civ6ArtFileNode : Civ6ProjectFileNode {
                 }
 
                 if (!string.IsNullOrWhiteSpace(text)) {
-                    text.Replace("AssetObjects::GameArtSpecification", "AssetObjects..GameArtSpecification");
+                    text = text.Replace("AssetObjects::GameArtSpecification", "AssetObjects..GameArtSpecification");
                     XmlDocument xmlDocument = new XmlDocument();
                     xmlDocument.LoadXml(text);
                     XmlElement xmlElement = (XmlElement)xmlDocument.SelectSingleNode("//requiredGameArtIDs/Element/id");
@@ -68,9 +68,7 @@ public class Civ6ArtFileNode : Civ6ProjectFileNode {
             OAFileItem oafileItem = GetAutomationObject() as OAFileItem;
             TextDocument textDocument = oafileItem.Document.Object("TextDocument") as TextDocument;
             EditPoint editPoint = textDocument.StartPoint.CreateEditPoint();
-            string text = editPoint.GetText(textDocument.EndPoint);
-
-            text.Replace("AssetObjects::GameArtSpecification", "AssetObjects..GameArtSpecification");
+            string text = editPoint.GetText(textDocument.EndPoint).Replace("AssetObjects::GameArtSpecification", "AssetObjects..GameArtSpecification");
 
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(text);

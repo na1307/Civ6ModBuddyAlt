@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -35,7 +34,7 @@ public class FrontEndActions : ProjectCollection<FrontEndAction> {
                 }
 
                 xdocument.Root.Add(xelement);
-            } catch (Exception) {
+            } catch {
             }
         }
 
@@ -77,7 +76,7 @@ public class FrontEndActions : ProjectCollection<FrontEndAction> {
                         }
 
                         list.Add(frontEndAction);
-                    } catch (Exception) {
+                    } catch {
                     }
                 }
             }

@@ -74,7 +74,7 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
             }
         }
 
-        xelement.SetElementValue("Created", ((long)Created.ToUniversalTime().Subtract(new DateTime(1970, 1, 1)).TotalSeconds).ToString());
+        xelement.SetElementValue("Created", ((long)Created.ToUniversalTime().Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds).ToString());
 
         if (!string.IsNullOrWhiteSpace(Teaser)) {
             xelement.SetElementValue("Teaser", Teaser);
