@@ -32,37 +32,31 @@ public class GeneratePantryPaths : Microsoft.Build.Utilities.Task {
 
         ParseArtXml(artXmlPath, ref queue);
 
-        string text = Path.Combine(assetsPath, "Civ6", "DLC", "CivRoyaleScenario", "pantry");
-        string text2 = Path.Combine(assetsPath, "Civ6", "DLC", "Expansion2", "pantry");
-        string text3 = Path.Combine(assetsPath, "Civ6", "DLC", "Expansion1", "pantry");
-        string text4 = Path.Combine(assetsPath, "Civ6", "DLC", "Shared", "pantry");
-        string text5 = Path.Combine(assetsPath, "Civ6", "pantry");
-
         Dictionary<string, GameArtId> dictionary = new() {
             ["cb2f71b7-843e-4af3-9ca7-992acda9c195"] = new() {
                 Id = "cb2f71b7-843e-4af3-9ca7-992acda9c195",
                 Name = "Civ6",
-                PantryPath = text5
+                PantryPath = Path.Combine(assetsPath, "Civ6", "pantry")
             },
             ["725760e3-7fc0-4be7-abf1-17bc756d5436"] = new() {
                 Id = "725760e3-7fc0-4be7-abf1-17bc756d5436",
                 Name = "Shared",
-                PantryPath = text4
+                PantryPath = Path.Combine(assetsPath, "Civ6", "DLC", "Shared", "pantry")
             },
             ["7446c8fe-29eb-44f8-801f-098f681cc5c5"] = new() {
                 Id = "7446c8fe-29eb-44f8-801f-098f681cc5c5",
                 Name = "Expansion1",
-                PantryPath = text3
+                PantryPath = Path.Combine(assetsPath, "Civ6", "DLC", "Expansion1", "pantry")
             },
             ["b1b63999-6b16-4dd2-a5b6-eb19794aa8ca"] = new() {
                 Id = "b1b63999-6b16-4dd2-a5b6-eb19794aa8ca",
                 Name = "Expansion2",
-                PantryPath = text2
+                PantryPath = Path.Combine(assetsPath, "Civ6", "DLC", "Expansion2", "pantry")
             },
             ["E05D018D-A6ED-469B-AA5E-5D122693E2EC"] = new() {
                 Id = "E05D018D-A6ED-469B-AA5E-5D122693E2EC",
                 Name = "CivRoyaleScenario",
-                PantryPath = text
+                PantryPath = Path.Combine(assetsPath, "Civ6", "DLC", "CivRoyaleScenario", "pantry")
             }
         };
 
@@ -113,10 +107,7 @@ public class GeneratePantryPaths : Microsoft.Build.Utilities.Task {
                                 string innerText2 = xmlNode3.Attributes["text"].InnerText;
 
                                 if (!string.IsNullOrWhiteSpace(innerText) && !string.IsNullOrWhiteSpace(innerText2)) {
-                                    references.Enqueue(new GameArtId {
-                                        Name = innerText,
-                                        Id = innerText2
-                                    });
+                                    references.Enqueue(new GameArtId(innerText, innerText2, default));
                                 }
                             }
                         }

@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Minor Code Smell", "S2094:Classes should not be empty", Justification = "<보류 중>", Scope = "type", Target = "~T:Civ6ModBuddyAlt.Projects.Civ6ProjectFileProperties")]
+[assembly: SuppressMessage("Minor Code Smell", "S2094:Classes should not be empty", Justification = "<보류 중>", Scope = "type", Target = "~T:System.Runtime.CompilerServices.IsExternalInit")]

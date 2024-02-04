@@ -62,6 +62,7 @@
       <DependentUpon>Civ6PathUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IsExternalInit.cs" />
     <Compile Include="Projects\Action.cs" />
     <Compile Include="Projects\ActionFile.cs" />
     <Compile Include="Projects\ActionReference.cs" />

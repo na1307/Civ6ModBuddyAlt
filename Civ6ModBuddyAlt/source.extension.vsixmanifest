@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="Civ6ModBuddyAlt.99a48fd5-2428-4720-9d9a-5d674820d7c4" Version="1.0.2" Language="en-US" Publisher="Bluehill" />
+        <Identity Id="Civ6ModBuddyAlt.99a48fd5-2428-4720-9d9a-5d674820d7c4" Version="1.1" Language="en-US" Publisher="Bluehill" />
         <DisplayName>Civilization VI Mod Editor</DisplayName>
         <Description xml:space="preserve">An extension that alternative to Civilization VI ModBuddy.</Description>
         <Preview>true</Preview>
