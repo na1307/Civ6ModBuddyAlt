@@ -2,8 +2,8 @@
 
 namespace Civ6ModBuddyAlt.Projects.Properties;
 
-public partial class addModAssociationDialog : Form {
-    public addModAssociationDialog() {
+public partial class AddModAssociationDialog : Form {
+    public AddModAssociationDialog() {
         InitializeComponent();
         modsComboBox.Items.Add("(Browse)");
     }

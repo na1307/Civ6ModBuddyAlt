@@ -14,12 +14,11 @@ public abstract class Civ6SettingsPage : SettingsPage {
         ThreadHelper.ThrowIfNotOnUIThread();
         base.Activate(parent, pRect, bModal);
 
-        if (ProjectManager is Civ6ProjectNode) {
-            AddVisualElements();
-            return;
+        if (ProjectManager is not Civ6ProjectNode) {
+            throw new ApplicationException("Project manager type incompatibility error.");
         }
 
-        throw new ApplicationException("Project manager type incompatibility error.");
+        AddVisualElements();
     }
 
     protected override void BindProperties() { }

@@ -36,7 +36,7 @@ public partial class AssociationsUserControl : UserControl {
     }
 
     private void addModDependencyButton_Click(object sender, EventArgs e) {
-        using addModAssociationDialog addModAssociationDialog = new();
+        using AddModAssociationDialog addModAssociationDialog = new();
 
         if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
             ModAssociation value = addModAssociationDialog.Value;
@@ -70,7 +70,7 @@ public partial class AssociationsUserControl : UserControl {
     }
 
     private void addModReferenceButton_Click(object sender, EventArgs e) {
-        using addModAssociationDialog addModAssociationDialog = new();
+        using AddModAssociationDialog addModAssociationDialog = new();
 
         if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
             ModAssociation value = addModAssociationDialog.Value;
@@ -104,7 +104,7 @@ public partial class AssociationsUserControl : UserControl {
     }
 
     private void addModBlockerButton_Click(object sender, EventArgs e) {
-        using addModAssociationDialog addModAssociationDialog = new();
+        using AddModAssociationDialog addModAssociationDialog = new();
 
         if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
             ModAssociation value = addModAssociationDialog.Value;

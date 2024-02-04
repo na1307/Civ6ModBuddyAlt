@@ -1,6 +1,6 @@
 ﻿namespace Civ6ModBuddyAlt.Projects.Properties;
 
-partial class addModAssociationDialog {
+partial class AddModAssociationDialog {
     /// <summary>
     /// Required designer variable.
     /// </summary>
@@ -155,7 +155,7 @@ partial class addModAssociationDialog {
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // addModAssociationDialog
+            // AddModAssociationDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -173,7 +173,7 @@ partial class addModAssociationDialog {
             this.Controls.Add(this.modsComboBox);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "addModAssociationDialog";
+            this.Name = "AddModAssociationDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Mod Association";
             ((System.ComponentModel.ISupportInitialize)(this.fromVersionUpDown)).EndInit();
