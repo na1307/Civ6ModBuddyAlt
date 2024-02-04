@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
 using Microsoft.VisualStudio.Shell;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -14,17 +13,17 @@ namespace Civ6ModBuddyAlt.Projects;
 [ComVisible(true)]
 public class Civ6ArtFileNode : Civ6ProjectFileNode {
     private readonly Dictionary<string, Civ6Pantry> _PantriesById = [];
-    private readonly Dictionary<Civ6Pantry, Tuple<string, string>> _Pantries = [];
+    private readonly Dictionary<Civ6Pantry, (string repo, string id)> _Pantries = [];
 
     internal Civ6ArtFileNode(ProjectNode root, ProjectElement e) : base(root, e) {
         _PantriesById.Add("cb2f71b7-843e-4af3-9ca7-992acda9c195", Civ6Pantry.Base);
         _PantriesById.Add("725760e3-7fc0-4be7-abf1-17bc756d5436", Civ6Pantry.Shared);
         _PantriesById.Add("7446c8fe-29eb-44f8-801f-098f681cc5c5", Civ6Pantry.Expansion1);
         _PantriesById.Add("b1b63999-6b16-4dd2-a5b6-eb19794aa8ca", Civ6Pantry.Expansion2);
-        _Pantries.Add(Civ6Pantry.Base, Tuple.Create("Civ6", "cb2f71b7-843e-4af3-9ca7-992acda9c195"));
-        _Pantries.Add(Civ6Pantry.Shared, Tuple.Create("Shared", "725760e3-7fc0-4be7-abf1-17bc756d5436"));
-        _Pantries.Add(Civ6Pantry.Expansion1, Tuple.Create("Expansion1", "7446c8fe-29eb-44f8-801f-098f681cc5c5"));
-        _Pantries.Add(Civ6Pantry.Expansion2, Tuple.Create("Expansion2", "b1b63999-6b16-4dd2-a5b6-eb19794aa8ca"));
+        _Pantries.Add(Civ6Pantry.Base, ("Civ6", "cb2f71b7-843e-4af3-9ca7-992acda9c195"));
+        _Pantries.Add(Civ6Pantry.Shared, ("Shared", "725760e3-7fc0-4be7-abf1-17bc756d5436"));
+        _Pantries.Add(Civ6Pantry.Expansion1, ("Expansion1", "7446c8fe-29eb-44f8-801f-098f681cc5c5"));
+        _Pantries.Add(Civ6Pantry.Expansion2, ("Expansion2", "b1b63999-6b16-4dd2-a5b6-eb19794aa8ca"));
     }
 
     protected override NodeProperties CreatePropertiesObject() => new Civ6ArtFileProperties(this);
@@ -64,7 +63,7 @@ public class Civ6ArtFileNode : Civ6ProjectFileNode {
         }
         set {
             ThreadHelper.ThrowIfNotOnUIThread();
-            Tuple<string, string> tuple = _Pantries[value];
+            var (repo, id) = _Pantries[value];
             OAFileItem oafileItem = GetAutomationObject() as OAFileItem;
             TextDocument textDocument = oafileItem.Document.Object("TextDocument") as TextDocument;
             EditPoint editPoint = textDocument.StartPoint.CreateEditPoint();
@@ -74,10 +73,10 @@ public class Civ6ArtFileNode : Civ6ProjectFileNode {
             xmlDocument.LoadXml(text);
 
             XmlElement xmlElement = (XmlElement)xmlDocument.SelectSingleNode("//requiredGameArtIDs/Element/name");
-            xmlElement?.SetAttribute("text", tuple.Item1);
+            xmlElement?.SetAttribute("text", repo);
 
             XmlElement xmlElement2 = (XmlElement)xmlDocument.SelectSingleNode("//requiredGameArtIDs/Element/id");
-            xmlElement2?.SetAttribute("text", tuple.Item2);
+            xmlElement2?.SetAttribute("text", id);
 
             XmlWriterSettings xmlWriterSettings = new XmlWriterSettings {
                 Indent = true,

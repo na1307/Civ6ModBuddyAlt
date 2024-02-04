@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Civ6ModBuddyAlt.Projects;
 
@@ -13,7 +14,7 @@ public class BasicProperty : INotifyPropertyChanged {
         set {
             if (_name != value) {
                 _name = value;
-                NotifyPropertyChanged("Name");
+                NotifyPropertyChanged();
             }
         }
     }
@@ -23,12 +24,12 @@ public class BasicProperty : INotifyPropertyChanged {
         set {
             if (_value != value) {
                 _value = value;
-                NotifyPropertyChanged("Value");
+                NotifyPropertyChanged();
             }
         }
     }
 
-    private void NotifyPropertyChanged(string info) {
+    private void NotifyPropertyChanged([CallerMemberName] string info = null) {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
     }
 }

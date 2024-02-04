@@ -11,7 +11,6 @@ public class Civ6ProjectFactory(Civ6ModBuddyAltPackage package) : ProjectFactory
     protected override ProjectNode CreateProject() {
         ThreadHelper.ThrowIfNotOnUIThread();
         Civ6ProjectNode project = Civ6ProjectNode.CreateInstance(package);
-
         project.SetSite((IOleServiceProvider)((IServiceProvider)package).GetService(typeof(IOleServiceProvider)));
 
         return project;

@@ -61,6 +61,7 @@
     <Compile Include="Civ6PathUserControl.Designer.cs">
       <DependentUpon>Civ6PathUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Projects\Action.cs" />
     <Compile Include="Projects\ActionFile.cs" />
     <Compile Include="Projects\ActionReference.cs" />

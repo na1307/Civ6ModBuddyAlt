@@ -43,7 +43,7 @@ public class InGameActions(Civ6ProjectNode projectMgr) : ProjectCollection<InGam
                 }
 
                 xdocument.Root.Add(xelement);
-            } catch (Exception) {
+            } catch {
             }
         }
 
@@ -101,7 +101,7 @@ public class InGameActions(Civ6ProjectNode projectMgr) : ProjectCollection<InGam
                         }
 
                         list.Add(inGameAction);
-                    } catch (Exception) {
+                    } catch {
                     }
                 }
             }

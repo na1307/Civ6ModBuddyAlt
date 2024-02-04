@@ -18,7 +18,7 @@ public class Civ6ProjectFileNode : FileNode {
         return automationObject;
     }
 
-    internal ServiceCreatorCallback ServiceCreator => new(CreateServices);
+    internal ServiceCreatorCallback ServiceCreator => CreateServices;
 
     private object CreateServices(Type serviceType) {
         object obj = null;
