@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.Project;
+using Microsoft.VisualStudio.Shell;
 using System;
 using System.Runtime.InteropServices;
 using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
@@ -14,6 +15,7 @@ public class Civ6ProjectFactory : ProjectFactory {
     }
 
     protected override ProjectNode CreateProject() {
+        ThreadHelper.ThrowIfNotOnUIThread();
         Civ6ProjectNode project = Civ6ProjectNode.CreateInstance(_package);
 
         project.SetSite((IOleServiceProvider)((IServiceProvider)_package).GetService(typeof(IOleServiceProvider)));

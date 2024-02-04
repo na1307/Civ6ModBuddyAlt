@@ -1,6 +1,7 @@
 ﻿using EnvDTE;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
+using Microsoft.VisualStudio.Shell;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,6 +33,7 @@ public class Civ6ArtFileNode : Civ6ProjectFileNode {
 
     public Civ6Pantry Pantry {
         get {
+            ThreadHelper.ThrowIfNotOnUIThread();
             Civ6Pantry civ6Pantry = Civ6Pantry.Base;
 
             if (GetAutomationObject() is OAFileItem oafileItem) {
@@ -61,6 +63,7 @@ public class Civ6ArtFileNode : Civ6ProjectFileNode {
             return civ6Pantry;
         }
         set {
+            ThreadHelper.ThrowIfNotOnUIThread();
             Tuple<string, string> tuple = _Pantries[value];
             OAFileItem oafileItem = GetAutomationObject() as OAFileItem;
             TextDocument textDocument = oafileItem.Document.Object("TextDocument") as TextDocument;

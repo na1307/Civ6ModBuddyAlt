@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Project;
+using Microsoft.VisualStudio.Shell;
 using System;
 using System.Runtime.InteropServices;
 
@@ -10,6 +11,7 @@ public abstract class Civ6SettingsPage : SettingsPage {
     protected Civ6SettingsPage() : base(Civ6ProjectNode.Instance) { }
 
     public override void Activate(IntPtr parent, RECT[] pRect, int bModal) {
+        ThreadHelper.ThrowIfNotOnUIThread();
         base.Activate(parent, pRect, bModal);
 
         if (ProjectManager is Civ6ProjectNode) {
