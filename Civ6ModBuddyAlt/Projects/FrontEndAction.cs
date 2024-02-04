@@ -1,3 +1,3 @@
 ﻿namespace Civ6ModBuddyAlt.Projects;
 
-public class FrontEndAction : Action { }
+public class FrontEndAction : Action;

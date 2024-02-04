@@ -96,7 +96,7 @@ public partial class FileSelector : Window {
         }
 
         foreach (object obj in LogicalTreeHelper.GetChildren(node)) {
-            if (obj is DependencyObject && !IsValid((DependencyObject)obj)) {
+            if (obj is DependencyObject @object && !IsValid(@object)) {
                 return false;
             }
         }

@@ -7,18 +7,12 @@ using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 namespace Civ6ModBuddyAlt.Projects;
 
 [Guid(Civ6ModBuddyAltPackage.Civ6ProjectFactoryGuidString)]
-public class Civ6ProjectFactory : ProjectFactory {
-    private readonly Civ6ModBuddyAltPackage _package;
-
-    public Civ6ProjectFactory(Civ6ModBuddyAltPackage package) : base(package) {
-        _package = package;
-    }
-
+public class Civ6ProjectFactory(Civ6ModBuddyAltPackage package) : ProjectFactory(package) {
     protected override ProjectNode CreateProject() {
         ThreadHelper.ThrowIfNotOnUIThread();
-        Civ6ProjectNode project = Civ6ProjectNode.CreateInstance(_package);
+        Civ6ProjectNode project = Civ6ProjectNode.CreateInstance(package);
 
-        project.SetSite((IOleServiceProvider)((IServiceProvider)_package).GetService(typeof(IOleServiceProvider)));
+        project.SetSite((IOleServiceProvider)((IServiceProvider)package).GetService(typeof(IOleServiceProvider)));
 
         return project;
     }

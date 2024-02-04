@@ -4,9 +4,7 @@ using System.Xml.Linq;
 
 namespace Civ6ModBuddyAlt.Projects;
 
-public class FrontEndActions : ProjectCollection<FrontEndAction> {
-    public FrontEndActions(Civ6ProjectNode projectMgr) : base(projectMgr, "FrontEndActionData") { }
-
+public class FrontEndActions(Civ6ProjectNode projectMgr) : ProjectCollection<FrontEndAction>(projectMgr, "FrontEndActionData") {
     protected override string Serialize(IEnumerable<FrontEndAction> items) {
         XDocument xdocument = new XDocument(new XElement("FrontEndActions"));
 

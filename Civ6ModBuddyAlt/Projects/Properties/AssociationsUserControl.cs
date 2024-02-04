@@ -36,22 +36,22 @@ public partial class AssociationsUserControl : UserControl {
     }
 
     private void addModDependencyButton_Click(object sender, EventArgs e) {
-        using (addModAssociationDialog addModAssociationDialog = new()) {
-            if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
-                ModAssociation value = addModAssociationDialog.Value;
-                value.Kind = "Dependency";
-                _Associations.Add(value);
-            }
+        using addModAssociationDialog addModAssociationDialog = new();
+
+        if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
+            ModAssociation value = addModAssociationDialog.Value;
+            value.Kind = "Dependency";
+            _Associations.Add(value);
         }
     }
 
     private void addDlcDependencyButton_Click(object sender, EventArgs e) {
-        using (AddDlcAssociationDialog addDlcAssociationDialog = new()) {
-            if (addDlcAssociationDialog.ShowDialog() == DialogResult.OK) {
-                ModAssociation value = addDlcAssociationDialog.Value;
-                value.Kind = "Dependency";
-                _Associations.Add(value);
-            }
+        using AddDlcAssociationDialog addDlcAssociationDialog = new();
+
+        if (addDlcAssociationDialog.ShowDialog() == DialogResult.OK) {
+            ModAssociation value = addDlcAssociationDialog.Value;
+            value.Kind = "Dependency";
+            _Associations.Add(value);
         }
     }
 
@@ -70,22 +70,22 @@ public partial class AssociationsUserControl : UserControl {
     }
 
     private void addModReferenceButton_Click(object sender, EventArgs e) {
-        using (addModAssociationDialog addModAssociationDialog = new()) {
-            if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
-                ModAssociation value = addModAssociationDialog.Value;
-                value.Kind = "Reference";
-                _Associations.Add(value);
-            }
+        using addModAssociationDialog addModAssociationDialog = new();
+
+        if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
+            ModAssociation value = addModAssociationDialog.Value;
+            value.Kind = "Reference";
+            _Associations.Add(value);
         }
     }
 
     private void addDlcReferenceButton_Click(object sender, EventArgs e) {
-        using (AddDlcAssociationDialog addDlcAssociationDialog = new()) {
-            if (addDlcAssociationDialog.ShowDialog() == DialogResult.OK) {
-                ModAssociation value = addDlcAssociationDialog.Value;
-                value.Kind = "Reference";
-                _Associations.Add(value);
-            }
+        using AddDlcAssociationDialog addDlcAssociationDialog = new();
+
+        if (addDlcAssociationDialog.ShowDialog() == DialogResult.OK) {
+            ModAssociation value = addDlcAssociationDialog.Value;
+            value.Kind = "Reference";
+            _Associations.Add(value);
         }
     }
 
@@ -104,22 +104,22 @@ public partial class AssociationsUserControl : UserControl {
     }
 
     private void addModBlockerButton_Click(object sender, EventArgs e) {
-        using (addModAssociationDialog addModAssociationDialog = new()) {
-            if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
-                ModAssociation value = addModAssociationDialog.Value;
-                value.Kind = "Block";
-                _Associations.Add(value);
-            }
+        using addModAssociationDialog addModAssociationDialog = new();
+
+        if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
+            ModAssociation value = addModAssociationDialog.Value;
+            value.Kind = "Block";
+            _Associations.Add(value);
         }
     }
 
     private void addDlcBlockerButton_Click(object sender, EventArgs e) {
-        using (AddDlcAssociationDialog addDlcAssociationDialog = new()) {
-            if (addDlcAssociationDialog.ShowDialog() == DialogResult.OK) {
-                ModAssociation value = addDlcAssociationDialog.Value;
-                value.Kind = "Block";
-                _Associations.Add(value);
-            }
+        using AddDlcAssociationDialog addDlcAssociationDialog = new();
+
+        if (addDlcAssociationDialog.ShowDialog() == DialogResult.OK) {
+            ModAssociation value = addDlcAssociationDialog.Value;
+            value.Kind = "Block";
+            _Associations.Add(value);
         }
     }
 

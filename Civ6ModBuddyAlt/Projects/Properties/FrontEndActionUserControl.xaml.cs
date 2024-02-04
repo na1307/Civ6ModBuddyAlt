@@ -10,7 +10,7 @@ namespace Civ6ModBuddyAlt.Projects.Properties;
 /// FrontEndActionUserControl.xaml에 대한 상호 작용 논리
 /// </summary>
 public partial class FrontEndActionUserControl : UserControl, INotifyPropertyChanged {
-    private FrontEndActions _actions;
+    private readonly FrontEndActions _actions;
     private FrontEndAction _SelectedAction;
 
     public event EventHandler ActionsUpdated;

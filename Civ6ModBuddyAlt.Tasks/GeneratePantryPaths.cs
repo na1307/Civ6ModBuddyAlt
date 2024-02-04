@@ -66,7 +66,7 @@ public class GeneratePantryPaths : Microsoft.Build.Utilities.Task {
             }
         };
 
-        while (queue.Any()) {
+        while (queue.Count != 0) {
             GameArtId gameArtId = queue.Dequeue();
 
             if (dictionary.TryGetValue(gameArtId.Id, out var gameArtId2)) {

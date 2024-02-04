@@ -10,7 +10,7 @@ namespace Civ6ModBuddyAlt.Projects.Properties;
 /// InGameActionsUserControl.xaml에 대한 상호 작용 논리
 /// </summary>
 public partial class InGameActionsUserControl : UserControl, INotifyPropertyChanged {
-    private InGameActions _actions;
+    private readonly InGameActions _actions;
     private InGameAction _SelectedAction;
 
     public event EventHandler ActionsUpdated;

@@ -3,10 +3,8 @@ using System.IO;
 
 namespace Civ6ModBuddyAlt.Projects;
 
-public class Civ6ProjectShellSettings {
-    private readonly Civ6ModBuddyAltPackage projectPackage;
-
-    public Civ6ProjectShellSettings(Civ6ModBuddyAltPackage projectPackageArg) => projectPackage = projectPackageArg ?? throw new ArgumentNullException("projectPackageArg");
+public class Civ6ProjectShellSettings(Civ6ModBuddyAltPackage projectPackageArg) {
+    private readonly Civ6ModBuddyAltPackage projectPackage = projectPackageArg ?? throw new ArgumentNullException("projectPackageArg");
 
     public string UserPath {
         get => projectPackage.GetDialogPage<Civ6PathOptionPage>().UserPath;

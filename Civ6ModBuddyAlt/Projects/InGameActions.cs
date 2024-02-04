@@ -5,9 +5,7 @@ using System.Xml.Linq;
 
 namespace Civ6ModBuddyAlt.Projects;
 
-public class InGameActions : ProjectCollection<InGameAction> {
-    public InGameActions(Civ6ProjectNode projectMgr) : base(projectMgr, "InGameActionData") { }
-
+public class InGameActions(Civ6ProjectNode projectMgr) : ProjectCollection<InGameAction>(projectMgr, "InGameActionData") {
     protected override string Serialize(IEnumerable<InGameAction> items) {
         XDocument xdocument = new XDocument(new XElement("InGameActions"));
 

@@ -6,9 +6,7 @@ using System.Runtime.InteropServices;
 namespace Civ6ModBuddyAlt.Projects;
 
 [ComVisible(true)]
-public class Civ6ArtFileProperties : NodeProperties {
-    public Civ6ArtFileProperties(HierarchyNode node) : base(node) { }
-
+public class Civ6ArtFileProperties(HierarchyNode node) : NodeProperties(node) {
     [Description("FileNameDescription")]
     [Category("Misc")]
     [LocDisplayName("FileName")]
