@@ -49,13 +49,12 @@ partial class AddDlcAssociationDialog {
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Enabled = false;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(12, 49);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(345, 20);
             this.comboBox1.TabIndex = 1;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
             // label2
             // 
@@ -74,7 +73,7 @@ partial class AddDlcAssociationDialog {
             this.dlcNameTextBox.Name = "dlcNameTextBox";
             this.dlcNameTextBox.Size = new System.Drawing.Size(278, 21);
             this.dlcNameTextBox.TabIndex = 3;
-            this.dlcNameTextBox.TextChanged += new System.EventHandler(this.dlcNameTextBox_TextChanged);
+            this.dlcNameTextBox.TextChanged += new System.EventHandler(this.dlcTextBox_TextChanged);
             // 
             // label3
             // 
@@ -93,12 +92,11 @@ partial class AddDlcAssociationDialog {
             this.dlcPackageIdTextBox.Name = "dlcPackageIdTextBox";
             this.dlcPackageIdTextBox.Size = new System.Drawing.Size(278, 21);
             this.dlcPackageIdTextBox.TabIndex = 5;
-            this.dlcPackageIdTextBox.TextChanged += new System.EventHandler(this.dlcPakcageIdTextBox_TextChanged);
+            this.dlcPackageIdTextBox.TextChanged += new System.EventHandler(this.dlcTextBox_TextChanged);
             // 
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.okButton.Enabled = false;
             this.okButton.Location = new System.Drawing.Point(201, 148);
             this.okButton.Name = "okButton";
@@ -106,6 +104,7 @@ partial class AddDlcAssociationDialog {
             this.okButton.TabIndex = 6;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelbutton
             // 
