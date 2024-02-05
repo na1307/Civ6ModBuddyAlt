@@ -17,18 +17,18 @@ public partial class AssociationsUserControl : UserControl {
         dependenciesDataGridView.AutoGenerateColumns = false;
         referencesDataGridView.AutoGenerateColumns = false;
         blockersDataGridView.AutoGenerateColumns = false;
-        dependenciesDataGridView.DataSource = _Associations.Where((ModAssociation a) => a.Kind == "Dependency").ToList();
-        referencesDataGridView.DataSource = _Associations.Where((ModAssociation a) => a.Kind == "Reference").ToList();
-        blockersDataGridView.DataSource = _Associations.Where((ModAssociation a) => a.Kind == "Block").ToList();
+        dependenciesDataGridView.DataSource = _Associations.Where(a => a.Kind == "Dependency").ToList();
+        referencesDataGridView.DataSource = _Associations.Where(a => a.Kind == "Reference").ToList();
+        blockersDataGridView.DataSource = _Associations.Where(a => a.Kind == "Block").ToList();
     }
 
     private void _Associations_ListChanged(object sender, ListChangedEventArgs e) {
         dependenciesDataGridView.AutoGenerateColumns = false;
         referencesDataGridView.AutoGenerateColumns = false;
         blockersDataGridView.AutoGenerateColumns = false;
-        dependenciesDataGridView.DataSource = _Associations.Where((ModAssociation a) => a.Kind == "Dependency").ToList();
-        referencesDataGridView.DataSource = _Associations.Where((ModAssociation a) => a.Kind == "Reference").ToList();
-        blockersDataGridView.DataSource = _Associations.Where((ModAssociation a) => a.Kind == "Block").ToList();
+        dependenciesDataGridView.DataSource = _Associations.Where(a => a.Kind == "Dependency").ToList();
+        referencesDataGridView.DataSource = _Associations.Where(a => a.Kind == "Reference").ToList();
+        blockersDataGridView.DataSource = _Associations.Where(a => a.Kind == "Block").ToList();
     }
 
     private void dependenciesDataGridView_SelectionChanged(object sender, EventArgs e) {

@@ -192,6 +192,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Projects\Properties\AddModAssociationDialog.resx">
       <DependentUpon>AddModAssociationDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Projects\Properties\AssociationsUserControl.resx">
       <DependentUpon>AssociationsUserControl.cs</DependentUpon>
