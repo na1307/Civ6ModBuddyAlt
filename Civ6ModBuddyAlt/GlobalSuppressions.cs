@@ -9,3 +9,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Minor Code Smell", "S2094:Classes should not be empty", Justification = "<보류 중>", Scope = "type", Target = "~T:System.Runtime.CompilerServices.IsExternalInit")]
 [assembly: SuppressMessage("Usage", "VSTHRD102:Implement internal logic asynchronously", Justification = "<보류 중>", Scope = "member", Target = "~M:Civ6ModBuddyAlt.Projects.Properties.AddDlcAssociationDialog.initDPs~Civ6ModBuddyAlt.Projects.Properties.AddDlcAssociationDialog.DlcPackage[]")]
 [assembly: SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<보류 중>", Scope = "member", Target = "~F:Civ6ModBuddyAlt.Projects.Properties.AddDlcAssociationDialog.dlcsUrl")]
+[assembly: SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<보류 중>", Scope = "member", Target = "~M:Civ6ModBuddyAlt.Civ6PathOptionPage.getSteamPath(System.String)~System.String")]

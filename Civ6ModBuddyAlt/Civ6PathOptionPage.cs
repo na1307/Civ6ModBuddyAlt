@@ -15,7 +15,9 @@ public sealed class Civ6PathOptionPage : DialogPage {
 
     public string UserPath {
         get {
-            if (string.IsNullOrWhiteSpace(userPath)) userPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "My Games\\Sid Meier's Civilization VI");
+            if (string.IsNullOrWhiteSpace(userPath)) {
+                userPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "My Games\\Sid Meier's Civilization VI");
+            }
 
             return userPath;
         }
@@ -24,7 +26,9 @@ public sealed class Civ6PathOptionPage : DialogPage {
 
     public string GamePath {
         get {
-            if (string.IsNullOrWhiteSpace(gamePath)) gamePath = getSteamPath("Sid Meier's Civilization VI");
+            if (string.IsNullOrWhiteSpace(gamePath)) {
+                gamePath = getSteamPath("Sid Meier's Civilization VI");
+            }
 
             return gamePath;
         }
@@ -33,7 +37,9 @@ public sealed class Civ6PathOptionPage : DialogPage {
 
     public string ToolsPath {
         get {
-            if (string.IsNullOrWhiteSpace(toolsPath)) toolsPath = getSteamPath("Sid Meier's Civilization VI SDK");
+            if (string.IsNullOrWhiteSpace(toolsPath)) {
+                toolsPath = getSteamPath("Sid Meier's Civilization VI SDK");
+            }
 
             return toolsPath;
         }
@@ -42,28 +48,21 @@ public sealed class Civ6PathOptionPage : DialogPage {
 
     public string AssetsPath {
         get {
-            if (string.IsNullOrWhiteSpace(assetsPath)) assetsPath = getSteamPath("Sid Meier's Civilization VI SDK Assets");
+            if (string.IsNullOrWhiteSpace(assetsPath)) {
+                assetsPath = getSteamPath("Sid Meier's Civilization VI SDK Assets");
+            }
 
             return assetsPath;
         }
         set => assetsPath = value;
     }
 
-    protected override IWin32Window Window {
-        get {
-            Civ6PathUserControl page = new(this);
+    protected override IWin32Window Window => new Civ6PathUserControl(this);
 
-            page.Initialize();
-
-            return page;
-        }
-    }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<보류 중>")]
     private static string getSteamPath(string dirName) {
-        if (Directory.Exists("C:\\Program Files (x86)\\Steam\\steamapps\\common\\" + dirName)) return "C:\\Program Files (x86)\\Steam\\steamapps\\common\\" + dirName;
-        if (Directory.Exists("C:\\Program Files\\Steam\\steamapps\\common\\" + dirName)) return "C:\\Program Files\\Steam\\steamapps\\common\\" + dirName;
+        if (Directory.Exists(@"C:\Program Files (x86)\Steam\steamapps\common\" + dirName)) return @"C:\Program Files (x86)\Steam\steamapps\common\" + dirName;
+        if (Directory.Exists(@"C:\Program Files\Steam\steamapps\common\" + dirName)) return @"C:\Program Files\Steam\steamapps\common\" + dirName;
 
-        return Array.Find(Directory.GetLogicalDrives(), dl => Directory.Exists(dl + "SteamLibrary\\steamapps\\common\\" + dirName)) + "SteamLibrary\\steamapps\\common\\" + dirName;
+        return Array.Find(Directory.GetLogicalDrives(), dl => Directory.Exists(dl + @"SteamLibrary\steamapps\common\" + dirName)) + @"SteamLibrary\steamapps\common\" + dirName;
     }
 }
