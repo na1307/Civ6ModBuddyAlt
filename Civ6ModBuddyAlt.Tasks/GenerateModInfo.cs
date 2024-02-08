@@ -1,4 +1,5 @@
 ﻿using Microsoft.Build.Framework;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Civ6ModBuddyAlt.Tasks;
@@ -44,6 +45,7 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
         }
 
         string text = Path.GetFileNameWithoutExtension(TargetPath) + ".dep";
+
         if (Files != null) {
             ITaskItem taskItem = Array.Find(Files, (ITaskItem f) => Path.GetExtension(f.GetMetadata("FullPath")) == ".dep");
 
@@ -52,17 +54,17 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
             }
         }
 
-        XDocument xdocument = new XDocument(new XElement("Mod"));
+        XDocument xdocument = new(new XElement("Mod"));
 
         xdocument.Root.SetAttributeValue("id", ID);
         xdocument.Root.SetAttributeValue("version", Version);
 
-        XElement xelement = new XElement("Properties", new XElement("Name", Name), new XElement("Description", Description));
+        XElement xelement = new("Properties", new XElement("Name", Name), new XElement("Description", Description));
 
         xdocument.Root.Add(xelement);
 
         if (!string.IsNullOrWhiteSpace(CustomProperties)) {
-            XDocument xdocument2 = XDocument.Parse(CustomProperties);
+            var xdocument2 = XDocument.Parse(CustomProperties);
 
             if (xdocument2 != null) {
                 foreach (XElement xelement2 in xdocument2.Elements()) {
@@ -106,22 +108,20 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
         }
 
         if (!string.IsNullOrWhiteSpace(AssociationData)) {
-            XDocument xdocument3 = XDocument.Parse(AssociationData);
+            var xdocument3 = XDocument.Parse(AssociationData);
             List<XElement> list = xdocument3.Root.Elements("Dependency").ToList();
 
             if (list.Count > 0) {
-                XElement xelement3 = new XElement("Dependencies");
-
-                foreach (XElement xelement4 in list) {
-                    XElement xelement5 = new XElement("Mod");
-                    string value = xelement4.Attribute("id").Value;
-                    string value2 = xelement4.Attribute("title").Value;
-                    string text3 = (xelement4.Attribute("min_version") != null) ? xelement4.Attribute("min_version").Value : string.Empty;
-                    string text4 = (xelement4.Attribute("max_version") != null) ? xelement4.Attribute("max_version").Value : string.Empty;
-
+                XElement xelement3 = new("Dependencies");
+                foreach (var (xelement5, value, value2, text3, text4) in from XElement xelement4 in list
+                                                                         let xelement5 = new XElement("Mod")
+                                                                         let value = xelement4.Attribute("id").Value
+                                                                         let value2 = xelement4.Attribute("title").Value
+                                                                         let text3 = (xelement4.Attribute("min_version") != null) ? xelement4.Attribute("min_version").Value : string.Empty
+                                                                         let text4 = (xelement4.Attribute("max_version") != null) ? xelement4.Attribute("max_version").Value : string.Empty
+                                                                         select (xelement5, value, value2, text3, text4)) {
                     xelement5.SetAttributeValue("id", value);
                     xelement5.SetAttributeValue("title", value2);
-
                     if (text3 != string.Empty) {
                         xelement5.SetAttributeValue("min_version", text3);
                     }
@@ -135,18 +135,19 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
 
                 xdocument.Root.Add(xelement3);
             }
+
             List<XElement> list2 = xdocument3.Root.Elements("Reference").ToList();
 
             if (list2.Count > 0) {
-                XElement xelement6 = new XElement("References");
+                XElement xelement6 = new("References");
 
-                foreach (XElement xelement7 in list2) {
-                    XElement xelement8 = new XElement("Mod");
-                    string value3 = xelement7.Attribute("id").Value;
-                    string value4 = xelement7.Attribute("title").Value;
-                    string text5 = (xelement7.Attribute("min_version") != null) ? xelement7.Attribute("min_version").Value : string.Empty;
-                    string text6 = (xelement7.Attribute("max_version") != null) ? xelement7.Attribute("max_version").Value : string.Empty;
-
+                foreach (var (xelement8, value3, value4, text5, text6) in from XElement xelement7 in list2
+                                                                          let xelement8 = new XElement("Mod")
+                                                                          let value3 = xelement7.Attribute("id").Value
+                                                                          let value4 = xelement7.Attribute("title").Value
+                                                                          let text5 = (xelement7.Attribute("min_version") != null) ? xelement7.Attribute("min_version").Value : string.Empty
+                                                                          let text6 = (xelement7.Attribute("max_version") != null) ? xelement7.Attribute("max_version").Value : string.Empty
+                                                                          select (xelement8, value3, value4, text5, text6)) {
                     xelement8.SetAttributeValue("id", value3);
                     xelement8.SetAttributeValue("title", value4);
 
@@ -167,15 +168,14 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
             List<XElement> list3 = xdocument3.Root.Elements("Block").ToList();
 
             if (list3.Count > 0) {
-                XElement xelement9 = new XElement("Blocks");
-
-                foreach (XElement xelement10 in list3) {
-                    XElement xelement11 = new XElement("Mod");
-                    string value5 = xelement10.Attribute("id").Value;
-                    string value6 = xelement10.Attribute("title").Value;
-                    string text7 = (xelement10.Attribute("min_version") != null) ? xelement10.Attribute("min_version").Value : string.Empty;
-                    string text8 = (xelement10.Attribute("max_version") != null) ? xelement10.Attribute("max_version").Value : string.Empty;
-
+                XElement xelement9 = new("Blocks");
+                foreach (var (xelement11, value5, value6, text7, text8) in from XElement xelement10 in list3
+                                                                           let xelement11 = new XElement("Mod")
+                                                                           let value5 = xelement10.Attribute("id").Value
+                                                                           let value6 = xelement10.Attribute("title").Value
+                                                                           let text7 = (xelement10.Attribute("min_version") != null) ? xelement10.Attribute("min_version").Value : string.Empty
+                                                                           let text8 = (xelement10.Attribute("max_version") != null) ? xelement10.Attribute("max_version").Value : string.Empty
+                                                                           select (xelement11, value5, value6, text7, text8)) {
                     xelement11.SetAttributeValue("id", value5);
                     xelement11.SetAttributeValue("title", value6);
 
@@ -195,18 +195,16 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
         }
 
         if (!string.IsNullOrWhiteSpace(ActionCriteriaData)) {
-            XDocument xdocument4 = XDocument.Parse(ActionCriteriaData);
+            var xdocument4 = XDocument.Parse(ActionCriteriaData);
 
             xdocument.Root.Add(xdocument4.Root);
         }
 
         if (!string.IsNullOrWhiteSpace(FrontEndActionData)) {
-            XDocument xdocument5 = XDocument.Parse(FrontEndActionData);
+            var xdocument5 = XDocument.Parse(FrontEndActionData);
 
             if (xdocument5.Root != null) {
-                IEnumerable<XElement> enumerable = xdocument5.Root.Elements().SelectMany((XElement e) => from f in e.Elements("File")
-                                                                                                         where f.Value == "(Mod Art Dependency File)"
-                                                                                                         select f);
+                IEnumerable<XElement> enumerable = xdocument5.Root.Elements().SelectMany(e => e.Elements("File").Where(f => f.Value == "(Mod Art Dependency File)"));
 
                 foreach (XElement xelement12 in enumerable) {
                     xelement12.Value = text;
@@ -217,12 +215,10 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
         }
 
         if (!string.IsNullOrWhiteSpace(InGameActionData)) {
-            XDocument xdocument6 = XDocument.Parse(InGameActionData);
+            var xdocument6 = XDocument.Parse(InGameActionData);
 
             if (xdocument6.Root != null) {
-                IEnumerable<XElement> enumerable2 = xdocument6.Root.Elements().SelectMany((XElement e) => from f in e.Elements("File")
-                                                                                                          where f.Value == "(Mod Art Dependency File)"
-                                                                                                          select f);
+                IEnumerable<XElement> enumerable2 = xdocument6.Root.Elements().SelectMany(e => e.Elements("File").Where(f => f.Value == "(Mod Art Dependency File)"));
 
                 foreach (XElement xelement13 in enumerable2) {
                     xelement13.Value = text;
@@ -233,24 +229,23 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
         }
 
         if (!string.IsNullOrWhiteSpace(LocalizedTextData)) {
-            XDocument xdocument7 = XDocument.Parse(LocalizedTextData);
+            var xdocument7 = XDocument.Parse(LocalizedTextData);
 
             xdocument.Root.Add(xdocument7.Root);
         }
 
         if (Files != null) {
-            XElement xelement14 = new XElement("Files");
+            XElement xelement14 = new("Files");
 
             xdocument.Root.Add(xelement14);
 
             Uri uri4 = new Uri(TargetPath);
-
-            foreach (ITaskItem taskItem2 in Files) {
-                string metadata = taskItem2.GetMetadata("FullPath");
-                Uri uri5 = new Uri(metadata);
-                Uri uri6 = uri4.MakeRelativeUri(uri5);
-                string text9 = Uri.UnescapeDataString(uri6.ToString());
-
+            foreach (var (metadata, text9) in from ITaskItem taskItem2 in Files
+                                              let metadata = taskItem2.GetMetadata("FullPath")
+                                              let uri5 = new Uri(metadata)
+                                              let uri6 = uri4.MakeRelativeUri(uri5)
+                                              let text9 = Uri.UnescapeDataString(uri6.ToString())
+                                              select (metadata, text9)) {
                 if (File.Exists(metadata)) {
                     xelement14.Add(new XElement("File", text9));
                 } else {
