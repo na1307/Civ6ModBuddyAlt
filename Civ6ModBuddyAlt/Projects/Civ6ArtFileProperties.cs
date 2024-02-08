@@ -20,6 +20,7 @@ public class Civ6ArtFileProperties(HierarchyNode node) : NodeProperties(node) {
     [DisplayName("Pantry")]
     [Category("Misc")]
     [Description("Specifies which pantry file to use.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("", "VSTHRD010")]
     public Civ6Pantry Pantry {
         get => ((Civ6ArtFileNode)Node).Pantry;
         set => ((Civ6ArtFileNode)Node).Pantry = value;

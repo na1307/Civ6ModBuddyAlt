@@ -30,7 +30,7 @@ public partial class FrontEndActionUserControl : UserControl, INotifyPropertyCha
         set {
             if (_SelectedAction != value) {
                 _SelectedAction = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedAction"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedAction)));
             }
         }
     }

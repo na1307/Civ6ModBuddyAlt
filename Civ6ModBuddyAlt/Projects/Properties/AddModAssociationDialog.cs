@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -25,5 +24,13 @@ public partial class AddModAssociationDialog : Form {
 
         modIdTextBox.Text = Regex.Match(s, "<Mod id=\"(?<id>.+)\" version=\"[0-9|.]+\">").Groups["id"].Value;
         modNameTextBox.Text = Regex.Match(s, "<Name>(?<name>.+)</Name>.").Groups["name"].Value;
+    }
+
+    private void button1_Click(object sender, EventArgs e) {
+        if (Guid.TryParseExact(modIdTextBox.Text, "D", out _)) {
+            DialogResult = DialogResult.OK;
+        } else {
+            MessageBox.Show("The Id does not fit the format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

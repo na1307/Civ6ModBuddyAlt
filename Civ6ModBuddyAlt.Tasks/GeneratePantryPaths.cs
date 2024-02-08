@@ -5,10 +5,8 @@ using System.Xml;
 namespace Civ6ModBuddyAlt.Tasks;
 
 public class GeneratePantryPaths : Microsoft.Build.Utilities.Task {
-    private string pantryPath = string.Empty;
-
     [Output]
-    public string PantryPath => pantryPath;
+    public string PantryPath { get; private set; } = string.Empty;
 
     [Required]
     public string ArtXmlPath { get; set; } = string.Empty;
@@ -17,9 +15,9 @@ public class GeneratePantryPaths : Microsoft.Build.Utilities.Task {
     public string AssetsPath { get; set; } = string.Empty;
 
     public override bool Execute() {
-        pantryPath = GeneratePaths(AssetsPath, ArtXmlPath);
+        PantryPath = GeneratePaths(AssetsPath, ArtXmlPath);
 
-        return !string.IsNullOrWhiteSpace(pantryPath);
+        return !string.IsNullOrWhiteSpace(PantryPath);
     }
 
     private static string GeneratePaths(string assetsPath, string artXmlPath) {
@@ -27,8 +25,8 @@ public class GeneratePantryPaths : Microsoft.Build.Utilities.Task {
             return string.Empty;
         }
 
-        StringBuilder stringBuilder = new StringBuilder();
-        Queue<GameArtId> queue = new Queue<GameArtId>();
+        StringBuilder stringBuilder = new();
+        Queue<GameArtId> queue = new();
 
         ParseArtXml(artXmlPath, ref queue);
 
@@ -64,14 +62,14 @@ public class GeneratePantryPaths : Microsoft.Build.Utilities.Task {
             GameArtId gameArtId = queue.Dequeue();
 
             if (dictionary.TryGetValue(gameArtId.Id, out var gameArtId2)) {
-                stringBuilder.Append(string.Format(" \"{0}\"", gameArtId2.PantryPath));
+                stringBuilder.Append($" \"{gameArtId2.PantryPath}\"");
                 ParseArtXml(Path.Combine(gameArtId2.PantryPath, string.Format("{0}.Art.xml", gameArtId2.Name)), ref queue);
             } else {
                 string text6 = Path.Combine(assetsPath, "Civ6", "DLC", gameArtId.Name, "pantry");
-                string text7 = Path.Combine(text6, string.Format("{0}.Art.xml", gameArtId.Name));
+                string text7 = Path.Combine(text6, $"{gameArtId.Name}.Art.xml");
 
                 if (File.Exists(text7)) {
-                    stringBuilder.Append(string.Format(" \"{0}\"", text6));
+                    stringBuilder.Append($" \"{text6}\"");
                     ParseArtXml(text7, ref queue);
                 } else {
                     throw new FileNotFoundException(string.Format("Could not find art xml. {0} - {1}", gameArtId.Name, gameArtId.Id));
@@ -86,43 +84,27 @@ public class GeneratePantryPaths : Microsoft.Build.Utilities.Task {
         string text = LoadXml(path);
 
         if (!string.IsNullOrWhiteSpace(text)) {
-            XmlDocument xmlDocument = new XmlDocument();
+            XmlDocument xmlDocument = new();
 
-            try {
-                xmlDocument.LoadXml(text);
+            xmlDocument.LoadXml(text);
 
-                XmlNode documentElement = xmlDocument.DocumentElement;
-                XmlNodeList xmlNodeList = documentElement.SelectNodes("requiredGameArtIDs/Element");
+            XmlNodeList xmlNodeList = xmlDocument.DocumentElement.SelectNodes("requiredGameArtIDs/Element");
 
-                if (xmlNodeList != null) {
-                    for (int i = 0; i < xmlNodeList.Count; i++) {
-                        XmlNode xmlNode = xmlNodeList[i];
-
-                        if (xmlNode != null) {
-                            XmlNode xmlNode2 = xmlNode.SelectSingleNode("name");
-                            XmlNode xmlNode3 = xmlNode.SelectSingleNode("id");
-
-                            if (xmlNode2 != null && xmlNode3 != null) {
-                                string innerText = xmlNode2.Attributes["text"].InnerText;
-                                string innerText2 = xmlNode3.Attributes["text"].InnerText;
-
-                                if (!string.IsNullOrWhiteSpace(innerText) && !string.IsNullOrWhiteSpace(innerText2)) {
-                                    references.Enqueue(new GameArtId(innerText, innerText2, string.Empty));
-                                }
-                            }
-                        }
-                    }
+            if (xmlNodeList != null) {
+                foreach (var (innerText, innerText2) in from XmlNode xmlNode in xmlNodeList
+                                                        where xmlNode != null
+                                                        let xmlNode2 = xmlNode.SelectSingleNode("name")
+                                                        let xmlNode3 = xmlNode.SelectSingleNode("id")
+                                                        where xmlNode2 != null && xmlNode3 != null
+                                                        let innerText = xmlNode2.Attributes["text"].InnerText
+                                                        let innerText2 = xmlNode3.Attributes["text"].InnerText
+                                                        where !string.IsNullOrWhiteSpace(innerText) && !string.IsNullOrWhiteSpace(innerText2)
+                                                        select (innerText, innerText2)) {
+                    references.Enqueue(new GameArtId(innerText, innerText2, string.Empty));
                 }
-            } catch {
             }
         }
     }
 
-    private static string LoadXml(string path) {
-        string text = File.ReadAllText(path);
-        text = text.Replace("\0", " ");
-        text = text.Replace("AssetObjects::GameArtSpecification", "AssetObjects..GameArtSpecification");
-
-        return text.TrimEnd(Environment.NewLine.ToCharArray());
-    }
+    private static string LoadXml(string path) => File.ReadAllText(path).Replace("\0", " ").Replace("AssetObjects::GameArtSpecification", "AssetObjects..GameArtSpecification").TrimEnd(Environment.NewLine.ToCharArray());
 }

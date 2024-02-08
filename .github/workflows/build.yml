@@ -16,7 +16,7 @@ jobs:
           distribution: temurin
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
+          fetch-depth: 0
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
         with:
@@ -47,5 +47,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"na1307_Civ6ModBuddyAlt" /o:"na1307" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          msbuild -r
+          msbuild -r -p:CreateVsixContainer=false -p:DeployExtension=false
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

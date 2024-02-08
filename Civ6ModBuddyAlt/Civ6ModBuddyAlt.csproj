@@ -20,7 +20,6 @@
     <Using Remove="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\bluehill.snk" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>

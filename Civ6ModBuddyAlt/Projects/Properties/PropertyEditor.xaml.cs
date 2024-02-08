@@ -9,11 +9,8 @@ namespace Civ6ModBuddyAlt.Projects.Properties;
 /// PropertyEditor.xaml에 대한 상호 작용 논리
 /// </summary>
 public partial class PropertyEditor : Window {
-    private BasicProperty _Property;
-
     public PropertyEditor(BasicProperty property) {
         InitializeComponent();
-        _Property = property;
         DataContext = property;
     }
 
@@ -26,7 +23,7 @@ public partial class PropertyEditor : Window {
             bindingExpressionBase.UpdateSource();
         }
 
-        DialogResult = new bool?(true);
+        DialogResult = true;
     }
 
     private void CancelButton_Click(object sender, RoutedEventArgs e) {
@@ -34,10 +31,10 @@ public partial class PropertyEditor : Window {
             bindingExpressionBase.UpdateTarget();
         }
 
-        DialogResult = new bool?(false);
+        DialogResult = false;
     }
 
-    private bool IsValid(DependencyObject node) {
+    private static bool IsValid(DependencyObject node) {
         if (node != null && Validation.GetHasError(node)) {
             if (node is IInputElement element) {
                 Keyboard.Focus(element);

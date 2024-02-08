@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 
 namespace Civ6ModBuddyAlt.Projects;
 
@@ -14,19 +13,8 @@ public class InGameAction : Action {
     public Collection<string> Criteria { get; } = [];
     public Collection<ActionReference> References { get; } = [];
 
-    private void Criteria_CollectionItemChanged(object sender, EventArgs e) {
-        OnPropertyChanged("Criteria");
-    }
-
-    private void Criteria_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-        OnPropertyChanged("Criteria");
-    }
-
-    private void References_CollectionItemChanged(object sender, EventArgs e) {
-        OnPropertyChanged("References");
-    }
-
-    private void References_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-        OnPropertyChanged("References");
-    }
+    private void Criteria_CollectionItemChanged(object sender, EventArgs e) => OnPropertyChanged(nameof(Criteria));
+    private void Criteria_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => OnPropertyChanged(nameof(Criteria));
+    private void References_CollectionItemChanged(object sender, EventArgs e) => OnPropertyChanged(nameof(References));
+    private void References_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => OnPropertyChanged(nameof(References));
 }

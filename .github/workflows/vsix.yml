@@ -1,0 +1,30 @@
+name: VSIX
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: VSIX
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: MSBuild
+        uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x64
+      - name: Increment VSIX version
+        id: vsix_version
+        uses: timheuer/vsix-version-stamp@v2
+        with:
+          manifest-file: Civ6ModBuddyAlt\source.extension.vsixmanifest
+      - name: Build
+        run: msbuild -r -p:Configuration=Release -p:DeployExtension=false
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.repository.name }}.vsix
+          path: /**/*.vsix

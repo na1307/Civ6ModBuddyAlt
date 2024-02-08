@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Shell;
-using System;
 using System.Runtime.InteropServices;
 
 namespace Civ6ModBuddyAlt.Projects.Properties;
@@ -15,7 +14,7 @@ public abstract class Civ6SettingsPage : SettingsPage {
         base.Activate(parent, pRect, bModal);
 
         if (ProjectManager is not Civ6ProjectNode) {
-            throw new ApplicationException("Project manager type incompatibility error.");
+            throw new ModBuddyException("Project manager type incompatibility error.");
         }
 
         AddVisualElements();

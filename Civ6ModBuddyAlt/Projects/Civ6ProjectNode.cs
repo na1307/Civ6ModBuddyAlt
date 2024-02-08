@@ -15,13 +15,11 @@ public class Civ6ProjectNode : ProjectNode {
     private static Civ6ProjectNode? instance;
     private static readonly object padlock = new();
     private static readonly ImageList imageList = Utilities.GetImageList(typeof(Civ6ProjectNode).Assembly.GetManifestResourceStream("Civ6ModBuddyAlt.Civ6Project.bmp"));
-    private readonly Civ6ModBuddyAltPackage _package;
     private readonly BindingList<ModAssociation> modAssociations = [];
     private VSProject? vsProject;
     private string? _currentModAssociationsProperty;
 
     private Civ6ProjectNode(Civ6ModBuddyAltPackage package) : base(package) {
-        _package = package;
         CanFileNodesHaveChilds = true;
         SupportsProjectDesigner = true;
         CanProjectDeleteItems = true;
@@ -70,7 +68,7 @@ public class Civ6ProjectNode : ProjectNode {
 
     public override void AddFileFromTemplate(string source, string target) {
         if (!File.Exists(source)) {
-            throw new FileNotFoundException(string.Format("Template file not found: {0}", source));
+            throw new FileNotFoundException($"Template file not found: {source}");
         }
 
         if (source.EndsWith(".Art.xml", StringComparison.CurrentCultureIgnoreCase)) {
