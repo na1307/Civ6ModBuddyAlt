@@ -21,8 +21,8 @@ public class Civ6ArtFileProperties(HierarchyNode node) : NodeProperties(node) {
     [Category("Misc")]
     [Description("Specifies which pantry file to use.")]
     public Civ6Pantry Pantry {
-        get => (Node as Civ6ArtFileNode).Pantry;
-        set => (Node as Civ6ArtFileNode).Pantry = value;
+        get => ((Civ6ArtFileNode)Node).Pantry;
+        set => ((Civ6ArtFileNode)Node).Pantry = value;
     }
 
     [Category("Misc")]
@@ -34,5 +34,5 @@ public class Civ6ArtFileProperties(HierarchyNode node) : NodeProperties(node) {
     public string Extension => Path.GetExtension(Node.Caption);
 
     [Browsable(false)]
-    public string SubType { get; set; }
+    public string SubType { get; set; } = string.Empty;
 }

@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Civ6ModBuddyAlt.Projects;
 
 public class ActionFile : INotifyPropertyChanged {
-    private string _File;
+    private string _File = string.Empty;
     private int _Priority;
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public string File {
         get => _File;
@@ -20,19 +19,17 @@ public class ActionFile : INotifyPropertyChanged {
         set => SetField(ref _Priority, value);
     }
 
-    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null) {
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
         if (EqualityComparer<T>.Default.Equals(field, value)) {
             return false;
         }
 
         field = value;
 
-        OnPropertyChanged(propertyName);
+        OnPropertyChanged(propertyName!);
 
         return true;
     }
 
-    protected virtual void OnPropertyChanged(string propertyName) {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+    protected virtual void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

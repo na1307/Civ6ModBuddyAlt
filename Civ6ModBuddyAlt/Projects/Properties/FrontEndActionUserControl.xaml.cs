@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,14 +10,14 @@ namespace Civ6ModBuddyAlt.Projects.Properties;
 /// </summary>
 public partial class FrontEndActionUserControl : UserControl, INotifyPropertyChanged {
     private readonly FrontEndActions _actions;
-    private FrontEndAction _SelectedAction;
+    private FrontEndAction? _SelectedAction;
 
-    public event EventHandler ActionsUpdated;
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event EventHandler? ActionsUpdated;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public FrontEndActionUserControl(Civ6ProjectNode projectMgr) {
         InitializeComponent();
-        _actions = new FrontEndActions(projectMgr);
+        _actions = new(projectMgr);
         _actions.CollectionChanged += Actions_CollectionChanged;
         _actions.CollectionItemChanged += Actions_CollectionItemChanged;
         DataContext = this;
@@ -26,7 +25,7 @@ public partial class FrontEndActionUserControl : UserControl, INotifyPropertyCha
 
     public FrontEndActions Actions => _actions;
 
-    public FrontEndAction SelectedAction {
+    public FrontEndAction? SelectedAction {
         get => _SelectedAction;
         set {
             if (_SelectedAction != value) {
@@ -36,17 +35,9 @@ public partial class FrontEndActionUserControl : UserControl, INotifyPropertyCha
         }
     }
 
-    private void Actions_CollectionItemChanged(object sender, PropertyChangedEventArgs e) {
-        ActionsUpdated?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void Actions_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-        ActionsUpdated?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void buttonAddAction_Click(object sender, RoutedEventArgs e) {
-        Actions.Add(new FrontEndAction());
-    }
+    private void Actions_CollectionItemChanged(object sender, PropertyChangedEventArgs e) => ActionsUpdated?.Invoke(this, EventArgs.Empty);
+    private void Actions_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => ActionsUpdated?.Invoke(this, EventArgs.Empty);
+    private void buttonAddAction_Click(object sender, RoutedEventArgs e) => Actions.Add(new FrontEndAction());
 
     private void buttonRemoveAction_Click(object sender, RoutedEventArgs e) {
         if (listActions.SelectedIndex != -1) {

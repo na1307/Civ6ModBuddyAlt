@@ -2,10 +2,7 @@
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Project.Automation;
 using Microsoft.VisualStudio.Shell.Interop;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -15,13 +12,13 @@ namespace Civ6ModBuddyAlt.Projects;
 
 public class Civ6ProjectNode : ProjectNode {
     internal static int imageIndex;
-    private static Civ6ProjectNode instance;
+    private static Civ6ProjectNode? instance;
     private static readonly object padlock = new();
     private static readonly ImageList imageList = Utilities.GetImageList(typeof(Civ6ProjectNode).Assembly.GetManifestResourceStream("Civ6ModBuddyAlt.Civ6Project.bmp"));
     private readonly Civ6ModBuddyAltPackage _package;
     private readonly BindingList<ModAssociation> modAssociations = [];
-    private VSProject vsProject;
-    private string _currentModAssociationsProperty;
+    private VSProject? vsProject;
+    private string? _currentModAssociationsProperty;
 
     private Civ6ProjectNode(Civ6ModBuddyAltPackage package) : base(package) {
         _package = package;
@@ -77,7 +74,7 @@ public class Civ6ProjectNode : ProjectNode {
         }
 
         if (source.EndsWith(".Art.xml", StringComparison.CurrentCultureIgnoreCase)) {
-            Civ6ProjectShellSettings civ6ProjectShellSettings = base.GetService(typeof(Civ6ProjectShellSettings)) as Civ6ProjectShellSettings;
+            Civ6ProjectShellSettings civ6ProjectShellSettings = (Civ6ProjectShellSettings)base.GetService(typeof(Civ6ProjectShellSettings));
             string text = Path.Combine(civ6ProjectShellSettings.AssetsPath, "Civ6", "DLC", "Shared", "pantry");
 
             Path.Combine(civ6ProjectShellSettings.AssetsPath, "pantry");
@@ -124,7 +121,7 @@ public class Civ6ProjectNode : ProjectNode {
     }
 
     public override void PrepareBuild(string config, string platform, bool cleanBuild) {
-        Civ6ProjectShellSettings customProjectShellSettings = base.GetService(typeof(Civ6ProjectShellSettings)) as Civ6ProjectShellSettings;
+        Civ6ProjectShellSettings customProjectShellSettings = (Civ6ProjectShellSettings)base.GetService(typeof(Civ6ProjectShellSettings));
         List<char> list = [.. Path.GetInvalidFileNameChars()];
 
         if (!list.Contains(';')) {
@@ -150,7 +147,7 @@ public class Civ6ProjectNode : ProjectNode {
 
     protected override Guid[] GetConfigurationIndependentPropertyPages() => [new(Civ6ModBuddyAltPackage.InfoSettingsPageGuidString), new(Civ6ModBuddyAltPackage.AssociationsSettingsPageGuidString), new(Civ6ModBuddyAltPackage.FrontEndActionsSettingsPageGuidString), new(Civ6ModBuddyAltPackage.InGameActionsSettingsPageGuidString)];
     protected override Guid[] GetPriorityProjectDesignerPages() => [new(Civ6ModBuddyAltPackage.InfoSettingsPageGuidString), new(Civ6ModBuddyAltPackage.AssociationsSettingsPageGuidString), new(Civ6ModBuddyAltPackage.FrontEndActionsSettingsPageGuidString), new(Civ6ModBuddyAltPackage.InGameActionsSettingsPageGuidString)];
-    protected override ReferenceContainerNode CreateReferenceContainerNode() => null;
+    protected override ReferenceContainerNode? CreateReferenceContainerNode() => null;
 
     protected override void Reload() {
         base.Reload();
@@ -197,8 +194,8 @@ public class Civ6ProjectNode : ProjectNode {
         }
     }
 
-    private object CreateServices(Type serviceType) {
-        object obj = null;
+    private object? CreateServices(Type serviceType) {
+        object? obj = null;
 
         if (typeof(VSProject) == serviceType) {
             obj = VSProject;
@@ -223,7 +220,7 @@ public class Civ6ProjectNode : ProjectNode {
 
         foreach (ModAssociation modAssociation in modAssociations) {
             if (!string.IsNullOrWhiteSpace(modAssociation.Type)) {
-                XElement xelement = new XElement(modAssociation.Kind);
+                XElement xelement = new XElement(modAssociation.Kind.ToString());
                 xelement.SetAttributeValue("type", modAssociation.Type);
                 xelement.SetAttributeValue("title", modAssociation.Name);
                 xelement.SetAttributeValue("id", modAssociation.Id);
@@ -259,7 +256,7 @@ public class Civ6ProjectNode : ProjectNode {
                         XAttribute xattribute = xelement.Attribute("min_version");
                         XAttribute xattribute2 = xelement.Attribute("max_version");
                         ModAssociation modAssociation = new ModAssociation {
-                            Kind = xelement.Name.LocalName,
+                            Kind = (ModAssociationKind)Enum.Parse(typeof(ModAssociationKind), xelement.Name.LocalName),
                             Type = xelement.Attribute("type").Value,
                             Name = xelement.Attribute("title").Value,
                             Id = xelement.Attribute("id").Value,

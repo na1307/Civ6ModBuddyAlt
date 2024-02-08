@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
+using static Civ6ModBuddyAlt.Projects.ModAssociationKind;
 
 namespace Civ6ModBuddyAlt.Projects.Properties;
 
@@ -17,30 +16,28 @@ public partial class AssociationsUserControl : UserControl {
         dependenciesDataGridView.AutoGenerateColumns = false;
         referencesDataGridView.AutoGenerateColumns = false;
         blockersDataGridView.AutoGenerateColumns = false;
-        dependenciesDataGridView.DataSource = _Associations.Where(a => a.Kind == "Dependency").ToList();
-        referencesDataGridView.DataSource = _Associations.Where(a => a.Kind == "Reference").ToList();
-        blockersDataGridView.DataSource = _Associations.Where(a => a.Kind == "Block").ToList();
+        dependenciesDataGridView.DataSource = _Associations.Where(a => a.Kind == Dependency).ToList();
+        referencesDataGridView.DataSource = _Associations.Where(a => a.Kind == Reference).ToList();
+        blockersDataGridView.DataSource = _Associations.Where(a => a.Kind == Block).ToList();
     }
 
     private void _Associations_ListChanged(object sender, ListChangedEventArgs e) {
         dependenciesDataGridView.AutoGenerateColumns = false;
         referencesDataGridView.AutoGenerateColumns = false;
         blockersDataGridView.AutoGenerateColumns = false;
-        dependenciesDataGridView.DataSource = _Associations.Where(a => a.Kind == "Dependency").ToList();
-        referencesDataGridView.DataSource = _Associations.Where(a => a.Kind == "Reference").ToList();
-        blockersDataGridView.DataSource = _Associations.Where(a => a.Kind == "Block").ToList();
+        dependenciesDataGridView.DataSource = _Associations.Where(a => a.Kind == Dependency).ToList();
+        referencesDataGridView.DataSource = _Associations.Where(a => a.Kind == Reference).ToList();
+        blockersDataGridView.DataSource = _Associations.Where(a => a.Kind == Block).ToList();
     }
 
-    private void dependenciesDataGridView_SelectionChanged(object sender, EventArgs e) {
-        removeSelectedDependencyButton.Enabled = dependenciesDataGridView.SelectedRows.Count > 0;
-    }
+    private void dependenciesDataGridView_SelectionChanged(object sender, EventArgs e) => removeSelectedDependencyButton.Enabled = dependenciesDataGridView.SelectedRows.Count > 0;
 
     private void addModDependencyButton_Click(object sender, EventArgs e) {
         using AddModAssociationDialog addModAssociationDialog = new();
 
         if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
             ModAssociation value = addModAssociationDialog.Value;
-            value.Kind = "Dependency";
+            value.Kind = Dependency;
             _Associations.Add(value);
         }
     }
@@ -50,7 +47,7 @@ public partial class AssociationsUserControl : UserControl {
 
         if (addDlcAssociationDialog.ShowDialog() == DialogResult.OK) {
             ModAssociation value = addDlcAssociationDialog.Value;
-            value.Kind = "Dependency";
+            value.Kind = Dependency;
             _Associations.Add(value);
         }
     }
@@ -59,22 +56,20 @@ public partial class AssociationsUserControl : UserControl {
         foreach (object obj in dependenciesDataGridView.SelectedRows) {
             DataGridViewRow dataGridViewRow = (DataGridViewRow)obj;
             if (!dataGridViewRow.IsNewRow) {
-                ModAssociation modAssociation = dataGridViewRow.DataBoundItem as ModAssociation;
+                ModAssociation modAssociation = (ModAssociation)dataGridViewRow.DataBoundItem;
                 _Associations.Remove(modAssociation);
             }
         }
     }
 
-    private void referencesDataGridView_SelectionChanged(object sender, EventArgs e) {
-        removeSelectedReferenceButton.Enabled = referencesDataGridView.SelectedRows.Count > 0;
-    }
+    private void referencesDataGridView_SelectionChanged(object sender, EventArgs e) => removeSelectedReferenceButton.Enabled = referencesDataGridView.SelectedRows.Count > 0;
 
     private void addModReferenceButton_Click(object sender, EventArgs e) {
         using AddModAssociationDialog addModAssociationDialog = new();
 
         if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
             ModAssociation value = addModAssociationDialog.Value;
-            value.Kind = "Reference";
+            value.Kind = Reference;
             _Associations.Add(value);
         }
     }
@@ -84,7 +79,7 @@ public partial class AssociationsUserControl : UserControl {
 
         if (addDlcAssociationDialog.ShowDialog() == DialogResult.OK) {
             ModAssociation value = addDlcAssociationDialog.Value;
-            value.Kind = "Reference";
+            value.Kind = Reference;
             _Associations.Add(value);
         }
     }
@@ -93,22 +88,20 @@ public partial class AssociationsUserControl : UserControl {
         foreach (object obj in referencesDataGridView.SelectedRows) {
             DataGridViewRow dataGridViewRow = (DataGridViewRow)obj;
             if (!dataGridViewRow.IsNewRow) {
-                ModAssociation modAssociation = dataGridViewRow.DataBoundItem as ModAssociation;
+                ModAssociation modAssociation = (ModAssociation)dataGridViewRow.DataBoundItem;
                 _Associations.Remove(modAssociation);
             }
         }
     }
 
-    private void blockersDataGridView_SelectionChanged(object sender, EventArgs e) {
-        removeSelectedBlockerButton.Enabled = blockersDataGridView.SelectedRows.Count > 0;
-    }
+    private void blockersDataGridView_SelectionChanged(object sender, EventArgs e) => removeSelectedBlockerButton.Enabled = blockersDataGridView.SelectedRows.Count > 0;
 
     private void addModBlockerButton_Click(object sender, EventArgs e) {
         using AddModAssociationDialog addModAssociationDialog = new();
 
         if (addModAssociationDialog.ShowDialog() == DialogResult.OK) {
             ModAssociation value = addModAssociationDialog.Value;
-            value.Kind = "Block";
+            value.Kind = Block;
             _Associations.Add(value);
         }
     }
@@ -118,7 +111,7 @@ public partial class AssociationsUserControl : UserControl {
 
         if (addDlcAssociationDialog.ShowDialog() == DialogResult.OK) {
             ModAssociation value = addDlcAssociationDialog.Value;
-            value.Kind = "Block";
+            value.Kind = Block;
             _Associations.Add(value);
         }
     }
@@ -127,7 +120,7 @@ public partial class AssociationsUserControl : UserControl {
         foreach (object obj in blockersDataGridView.SelectedRows) {
             DataGridViewRow dataGridViewRow = (DataGridViewRow)obj;
             if (!dataGridViewRow.IsNewRow) {
-                ModAssociation modAssociation = dataGridViewRow.DataBoundItem as ModAssociation;
+                ModAssociation modAssociation = (ModAssociation)dataGridViewRow.DataBoundItem;
                 _Associations.Remove(modAssociation);
             }
         }

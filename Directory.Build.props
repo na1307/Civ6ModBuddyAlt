@@ -9,7 +9,7 @@
     <FileVersion>1.1.0</FileVersion>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <WarningsAsErrors>Nullable</WarningsAsErrors>
     <Company>Bluehill</Company>
     <Copyright>Copyright © Bluehill 2024</Copyright>

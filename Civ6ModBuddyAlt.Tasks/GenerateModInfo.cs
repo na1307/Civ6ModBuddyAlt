@@ -5,27 +5,24 @@ namespace Civ6ModBuddyAlt.Tasks;
 
 public class GenerateModInfo : Microsoft.Build.Utilities.Task {
     [Required]
-    public string ID { get; set; }
+    public string ID { get; set; } = string.Empty;
 
     [Required]
-    public string Version { get; set; }
-
-    public string Stability { get; set; }
+    public string Version { get; set; } = string.Empty;
 
     [Required]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [Required]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
-    public string Teaser { get; set; }
-    public string Authors { get; set; }
-    public string SpecialThanks { get; set; }
-    public string Homepage { get; set; }
+    public string Teaser { get; set; } = string.Empty;
+    public string Authors { get; set; } = string.Empty;
+    public string SpecialThanks { get; set; } = string.Empty;
     public DateTime Created { get; set; } = DateTime.UtcNow;
 
     [Required]
-    public string TargetPath { get; set; }
+    public string TargetPath { get; set; } = string.Empty;
 
     public bool AffectsSavedGames { get; set; }
     public bool SupportsSinglePlayer { get; set; } = true;
@@ -33,13 +30,13 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
     public bool SupportsHotSeat { get; set; }
     public string CompatibleVersions { get; set; } = string.Empty;
     public string CustomProperties { get; set; } = string.Empty;
-    public string ActionCriteriaData { get; set; }
-    public string FrontEndActionData { get; set; }
-    public string InGameActionData { get; set; }
-    public string LocalizedTextData { get; set; }
+    public string ActionCriteriaData { get; set; } = string.Empty;
+    public string FrontEndActionData { get; set; } = string.Empty;
+    public string InGameActionData { get; set; } = string.Empty;
+    public string LocalizedTextData { get; set; } = string.Empty;
     public string AssociationData { get; set; } = string.Empty;
 
-    public ITaskItem[] Files { get; set; }
+    public ITaskItem[]? Files { get; set; }
 
     public override bool Execute() {
         if (!CheckProperties()) {
@@ -86,10 +83,6 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
 
         if (!string.IsNullOrWhiteSpace(SpecialThanks)) {
             xelement.SetElementValue("SpecialThanks", SpecialThanks);
-        }
-
-        if (!string.IsNullOrWhiteSpace(Homepage)) {
-            xelement.SetElementValue("Homepage", Homepage);
         }
 
         if (!AffectsSavedGames) {
@@ -272,23 +265,23 @@ public class GenerateModInfo : Microsoft.Build.Utilities.Task {
     }
 
     public bool CheckProperties() {
-        if (ID == null) {
+        if (string.IsNullOrWhiteSpace(ID)) {
             Log.LogError("ID is a required property of GenerateModInfo.", null);
         }
 
-        if (Version == null) {
+        if (string.IsNullOrWhiteSpace(Version)) {
             Log.LogError("Version is a required property of GenerateModInfo.", null);
         }
 
-        if (Name == null) {
+        if (string.IsNullOrWhiteSpace(Name)) {
             Log.LogError("Name is a required property of GenerateModInfo.", null);
         }
 
-        if (Description == null) {
+        if (string.IsNullOrWhiteSpace(Description)) {
             Log.LogError("Description is a required property of GenerateModInfo", null);
         }
 
-        if (TargetPath == null) {
+        if (string.IsNullOrWhiteSpace(TargetPath)) {
             Log.LogError("TargetPath is a required property of GenerateModInfo.", null);
         }
 

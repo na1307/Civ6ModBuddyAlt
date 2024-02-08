@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
 
 namespace Civ6ModBuddyAlt.Projects;
 
 public class Collection<T> : ObservableCollection<T> {
-    public event EventHandler<PropertyChangedEventArgs> CollectionItemChanged;
+    public event EventHandler<PropertyChangedEventArgs>? CollectionItemChanged;
 
     protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e) {
         switch (e.Action) {

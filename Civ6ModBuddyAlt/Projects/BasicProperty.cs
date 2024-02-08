@@ -4,10 +4,10 @@ using System.Runtime.CompilerServices;
 namespace Civ6ModBuddyAlt.Projects;
 
 public class BasicProperty : INotifyPropertyChanged {
-    private string _name;
-    private string _value;
+    private string _name = string.Empty;
+    private string _value = string.Empty;
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public string Name {
         get => _name;
@@ -29,7 +29,5 @@ public class BasicProperty : INotifyPropertyChanged {
         }
     }
 
-    private void NotifyPropertyChanged([CallerMemberName] string info = null) {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
-    }
+    private void NotifyPropertyChanged([CallerMemberName] string? info = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(info));
 }

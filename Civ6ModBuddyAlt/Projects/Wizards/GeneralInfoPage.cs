@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace Civ6ModBuddyAlt.Projects.Wizards;
@@ -12,7 +11,7 @@ public partial class GeneralInfoPage : UserControl, IModWizardPage {
     private bool canGoNext;
     private bool canGoBack;
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public GeneralInfoPage() {
         InitializeComponent();
@@ -46,13 +45,8 @@ public partial class GeneralInfoPage : UserControl, IModWizardPage {
     public string ModAuthors => authorsTextBox.Text;
     public string ModSpecialThanks => specialThanksTextBox.Text;
 
-    protected void OnPropertyChanged(string name) {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-    }
-
-    private void ValidateForm() {
-        CanGoNext = ValidateChildren(ValidationConstraints.Enabled);
-    }
+    protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    private void ValidateForm() => CanGoNext = ValidateChildren(ValidationConstraints.Enabled);
 
     private bool ValidateTextControl(Control control, string name, int minLength, int maxLength) {
         if (string.IsNullOrWhiteSpace(control.Text)) {
@@ -86,17 +80,9 @@ public partial class GeneralInfoPage : UserControl, IModWizardPage {
         return true;
     }
 
-    private void GeneralInfoPage_VisibleChanged(object sender, EventArgs e) {
-        ValidateForm();
-    }
-
-    private void GeneralInfoPage_Validating(object sender, CancelEventArgs e) {
-        ValidateChildren(ValidationConstraints.Enabled);
-    }
-
-    private void titleTextBox_TextChanged(object sender, EventArgs e) {
-        ValidateForm();
-    }
+    private void GeneralInfoPage_VisibleChanged(object sender, EventArgs e) => ValidateForm();
+    private void GeneralInfoPage_Validating(object sender, CancelEventArgs e) => ValidateChildren(ValidationConstraints.Enabled);
+    private void titleTextBox_TextChanged(object sender, EventArgs e) => ValidateForm();
 
     private void titleTextBox_Validating(object sender, CancelEventArgs e) {
         if (!ValidateTextControl(titleTextBox, "Name", minNameLength, maxNameLength)) {
@@ -104,17 +90,9 @@ public partial class GeneralInfoPage : UserControl, IModWizardPage {
         }
     }
 
-    private void authorsTextBox_TextChanged(object sender, EventArgs e) {
-        ValidateForm();
-    }
-
-    private void specialThanksTextBox_TextChanged(object sender, EventArgs e) {
-        ValidateForm();
-    }
-
-    private void descriptionTextBox_TextChanged(object sender, EventArgs e) {
-        ValidateForm();
-    }
+    private void authorsTextBox_TextChanged(object sender, EventArgs e) => ValidateForm();
+    private void specialThanksTextBox_TextChanged(object sender, EventArgs e) => ValidateForm();
+    private void descriptionTextBox_TextChanged(object sender, EventArgs e) => ValidateForm();
 
     private void descriptionTextBox_Validating(object sender, CancelEventArgs e) {
         if (!ValidateTextControl(descriptionTextBox, "Description", minDescriptionLength, maxDescriptionLength)) {

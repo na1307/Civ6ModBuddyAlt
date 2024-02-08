@@ -2,7 +2,6 @@
 using Civ6ModBuddyAlt.Projects.Properties;
 using Microsoft.VisualStudio.Project;
 using Microsoft.VisualStudio.Shell;
-using System;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 
@@ -89,7 +88,7 @@ public sealed class Civ6ModBuddyAltPackage : ProjectPackage {
     public string AssetsPath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).AssetsPath;
     public override string ProductUserContext => ProjectTypeName;
 
-    public TDialogPage GetDialogPage<TDialogPage>() where TDialogPage : class => GetDialogPage(typeof(TDialogPage)) as TDialogPage;
+    public TDialogPage GetDialogPage<TDialogPage>() where TDialogPage : DialogPage => (TDialogPage)GetDialogPage(typeof(TDialogPage));
 
     protected override void Initialize() {
         base.Initialize();

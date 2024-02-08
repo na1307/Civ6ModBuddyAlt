@@ -1,6 +1,4 @@
 ﻿using Microsoft.VisualStudio.Threading;
-using System;
-using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -43,7 +41,7 @@ public partial class AddDlcAssociationDialog : Form {
             JoinableTaskFactory factory = new(context);
             using HttpClient client = new();
 
-            return JsonSerializer.Deserialize<DlcPackage[]>(factory.Run(() => client.GetStreamAsync(dlcsUrl)));
+            return JsonSerializer.Deserialize<DlcPackage[]>(factory.Run(() => client.GetStreamAsync(dlcsUrl)))!;
         } catch (HttpRequestException) {
             // Not Avaliable
         }

@@ -1,6 +1,4 @@
 ﻿using Microsoft.VisualStudio.Project;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,27 +11,18 @@ namespace Civ6ModBuddyAlt.Projects.Properties;
 /// FileSelector.xaml에 대한 상호 작용 논리
 /// </summary>
 public partial class FileSelector : Window {
-    public FileSelector(Civ6ProjectNode projectMgr, List<string> extensions) {
+    public FileSelector(Civ6ProjectNode projectMgr, List<string>? extensions) {
         InitializeComponent();
+
         List<string> list = new(EnumerateFileNameSuggestions(projectMgr, extensions)) {
             "(Mod Art Dependency File)"
         };
+
         comboFiles.ItemsSource = list;
     }
 
-    public string File => comboFiles.SelectedItem as string;
-
-    public int Priority {
-        get {
-            int? value = priority.Value;
-
-            if (value == null) {
-                return 0;
-            }
-
-            return value.GetValueOrDefault();
-        }
-    }
+    public string File => (string)comboFiles.SelectedItem;
+    public int Priority => priority.Value.GetValueOrDefault();
 
     private void OKButton_Click(object sender, RoutedEventArgs e) {
         if (!IsValid(this)) {
@@ -55,7 +44,7 @@ public partial class FileSelector : Window {
         DialogResult = new bool?(false);
     }
 
-    private string[] EnumerateFileNameSuggestions(HierarchyNode parent, List<string> extensions) {
+    private static string[] EnumerateFileNameSuggestions(HierarchyNode parent, List<string>? extensions) {
         Uri uri = new Uri(parent.ProjectManager.ProjectFolder + Path.DirectorySeparatorChar);
         List<string> list = [];
 
@@ -86,7 +75,7 @@ public partial class FileSelector : Window {
         return [.. list];
     }
 
-    private bool IsValid(DependencyObject node) {
+    private static bool IsValid(DependencyObject node) {
         if (node != null && Validation.GetHasError(node)) {
             if (node is IInputElement element) {
                 Keyboard.Focus(element);

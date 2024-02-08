@@ -11,10 +11,10 @@ public class GeneratePantryPaths : Microsoft.Build.Utilities.Task {
     public string PantryPath => pantryPath;
 
     [Required]
-    public string ArtXmlPath { get; set; }
+    public string ArtXmlPath { get; set; } = string.Empty;
 
     [Required]
-    public string AssetsPath { get; set; }
+    public string AssetsPath { get; set; } = string.Empty;
 
     public override bool Execute() {
         pantryPath = GeneratePaths(AssetsPath, ArtXmlPath);
@@ -107,7 +107,7 @@ public class GeneratePantryPaths : Microsoft.Build.Utilities.Task {
                                 string innerText2 = xmlNode3.Attributes["text"].InnerText;
 
                                 if (!string.IsNullOrWhiteSpace(innerText) && !string.IsNullOrWhiteSpace(innerText2)) {
-                                    references.Enqueue(new GameArtId(innerText, innerText2, default));
+                                    references.Enqueue(new GameArtId(innerText, innerText2, string.Empty));
                                 }
                             }
                         }

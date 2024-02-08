@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -10,7 +8,7 @@ public abstract class Action : INotifyPropertyChanged {
     private string _Type = "UpdateDatabase";
     private string _Id = "NewAction";
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     protected Action() {
         Properties.CollectionChanged += Properties_CollectionChanged;
@@ -32,34 +30,21 @@ public abstract class Action : INotifyPropertyChanged {
     public Collection<BasicProperty> Properties { get; } = [];
     public Collection<ActionFile> Files { get; } = [];
 
-    protected virtual void OnPropertyChanged(string propertyName) {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+    protected virtual void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null) {
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
         if (EqualityComparer<T>.Default.Equals(field, value)) {
             return false;
         }
 
         field = value;
-        OnPropertyChanged(propertyName);
+        OnPropertyChanged(propertyName!);
 
         return true;
     }
 
-    private void Files_CollectionItemChanged(object sender, EventArgs e) {
-        OnPropertyChanged("Files");
-    }
-
-    private void Files_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-        OnPropertyChanged("Files");
-    }
-
-    private void Properties_CollectionItemChanged(object sender, EventArgs e) {
-        OnPropertyChanged("Properties");
-    }
-
-    private void Properties_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-        OnPropertyChanged("Properties");
-    }
+    private void Files_CollectionItemChanged(object sender, EventArgs e) => OnPropertyChanged(nameof(Files));
+    private void Files_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => OnPropertyChanged(nameof(Files));
+    private void Properties_CollectionItemChanged(object sender, EventArgs e) => OnPropertyChanged(nameof(Properties));
+    private void Properties_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => OnPropertyChanged(nameof(Properties));
 }
