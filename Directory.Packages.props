@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.VisualStudio.SDK" Version="17.8.37222" />
+    <PackageVersion Include="Microsoft.VisualStudio.TemplateWizardInterface" Version="17.5.33428.366" />
+    <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="17.9.3168" />
+    <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="17.8.3" />
+    <PackageVersion Include="Extended.Wpf.Toolkit" Version="4.6.0" />
+    <PackageVersion Include="Bluehill.CompilerServices" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <GlobalPackageReference Include="VSIX-SdkProjectAdapter" Version="3.0.0" />
+  </ItemGroup>
+</Project>

@@ -15,12 +15,6 @@
     <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VSIX-SdkProjectAdapter" Version="3.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Civ6Text.ico" />
     <None Include="TextFile.txt" />
   </ItemGroup>

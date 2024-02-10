@@ -32,17 +32,16 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.8.37222" ExcludeAssets="runtime">
+    <PackageReference Include="Microsoft.VisualStudio.SDK" ExcludeAssets="runtime">
       <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.TemplateWizardInterface" Version="17.5.33428.366" />
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="17.8.2365" />
-    <PackageReference Include="VSIX-SdkProjectAdapter" Version="3.0.0">
+    <PackageReference Include="Microsoft.VisualStudio.TemplateWizardInterface" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools">
       <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
-    <PackageReference Include="Bluehill.CompilerServices" Version="1.1.0" />
+    <PackageReference Include="Extended.Wpf.Toolkit" />
+    <PackageReference Include="Bluehill.CompilerServices" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Civ6ModBuddyAlt.Tasks\Civ6ModBuddyAlt.Tasks.csproj">
