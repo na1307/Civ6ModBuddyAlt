@@ -3,6 +3,6 @@
     <PackageReference Include="Microsoft.Build.Utilities.Core" />
   </ItemGroup>
   <ItemGroup>
-    <GlobalPackageReference  Remove="VSIX-SdkProjectAdapter" />
+    <GlobalPackageReference Remove="VSIX-SdkProjectAdapter" />
   </ItemGroup>
 </Project>
