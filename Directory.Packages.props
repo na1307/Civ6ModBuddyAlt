@@ -10,7 +10,4 @@
     <PackageVersion Include="Extended.Wpf.Toolkit" Version="4.6.0" />
     <PackageVersion Include="Bluehill.CompilerServices" Version="1.1.0" />
   </ItemGroup>
-  <ItemGroup>
-    <GlobalPackageReference Include="VSIX-SdkProjectAdapter" Version="3.0.0" />
-  </ItemGroup>
 </Project>

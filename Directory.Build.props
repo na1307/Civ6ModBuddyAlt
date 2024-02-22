@@ -1,23 +1,7 @@
 <Project>
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-    <RuntimeIdentifier>win</RuntimeIdentifier>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\bluehill.snk</AssemblyOriginatorKeyFile>
-    <FileVersion>1.1.0</FileVersion>
     <LangVersion>latest</LangVersion>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <WarningsAsErrors>Nullable</WarningsAsErrors>
-    <Company>Bluehill</Company>
-    <Copyright>Copyright © Bluehill 2024</Copyright>
-    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
-    <EnableNETAnalyzers>True</EnableNETAnalyzers>
-    <AnalysisLevel>latest</AnalysisLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net3.5-client' or '$(TargetFramework)' == 'net4.0-client'">
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
 </Project>
