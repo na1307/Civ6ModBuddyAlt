@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.Shell;
-using System;
+﻿global using Microsoft.VisualStudio.Shell;
+global using System;
+global using Task = System.Threading.Tasks.Task;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Task = System.Threading.Tasks.Task;
 
 namespace Civ6ModBuddyAlt;
 
@@ -24,6 +24,7 @@ namespace Civ6ModBuddyAlt;
 /// </para>
 /// </remarks>
 [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
+[ProvideOptionPage(typeof(Civ6PathOptionPage), "Civilization VI", "Path", 0, 0, true)]
 [Guid(PackageGuidString)]
 public sealed class Civ6ModBuddyAltPackage : AsyncPackage {
     /// <summary>
@@ -31,7 +32,51 @@ public sealed class Civ6ModBuddyAltPackage : AsyncPackage {
     /// </summary>
     public const string PackageGuidString = "8bf8641c-19cf-4132-9b76-b8ed019d0ce0";
 
+    /// <summary>
+    /// Civ6ProjectFactory GUID string.
+    /// </summary>
+    public const string Civ6ProjectFactoryGuidString = "67e9a580-b80a-47b4-aabe-ea3c686919ce";
+
+    /// <summary>
+    /// InfoSettingsPage GUID string.
+    /// </summary>
+    public const string InfoSettingsPageGuidString = "7d1d67d3-e13e-487e-9992-422c2cafd796";
+
+    /// <summary>
+    /// AssociationsSettingsPage GUID string.
+    /// </summary>
+    public const string AssociationsSettingsPageGuidString = "927cc605-5439-4006-b95c-992c39bde7c7";
+
+    /// <summary>
+    /// FrontEndActionsSettingsPage GUID string.
+    /// </summary>
+    public const string FrontEndActionsSettingsPageGuidString = "cdb5c7a3-8ced-43df-9f02-f7137aabd268";
+
+    /// <summary>
+    /// InGameActionsSettingsPage GUID string.
+    /// </summary>
+    public const string InGameActionsSettingsPageGuidString = "fb8672b3-8c8c-4244-b3e3-f5b647ec2e37";
+
+    public const string ProjectTypeName = "Civ6ModProject";
+
+    public const string PropertyCannotBeEmpty = "{0} cannot be empty.";
+
+    public const string PropertyMustBeAtLeastXLength = "{0} must be at least {1} characters long.";
+
+    public const string PropertyMustBeAtMaxXLength = "{0} can be no longer than {1} characters long.";
+
+    public const string DefaultModName = "My Custom Mod";
+
+    public const string DefaultModDescription = "This is a brief description of the mod.";
+
+    public const string WizardCaption = "Create a new mod - {0} of {1}";
+
     #region Package Members
+
+    public string UserPath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).UserPath;
+    public string GamePath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).GamePath;
+    public string ToolsPath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).ToolsPath;
+    public string AssetsPath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).AssetsPath;
 
     /// <summary>
     /// Initialization of the package; this method is called right after the package is sited, so this is the place
