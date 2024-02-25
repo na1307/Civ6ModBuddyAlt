@@ -1,4 +1,5 @@
-﻿global using Microsoft.VisualStudio.Shell;
+﻿global using Microsoft.VisualStudio.ProjectSystem;
+global using Microsoft.VisualStudio.Shell;
 global using System;
 global using Task = System.Threading.Tasks.Task;
 using System.Runtime.InteropServices;

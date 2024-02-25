@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectSchemaDefinitions
+    xmlns="http://schemas.microsoft.com/build/2009/properties">
+
+  <ContentType Name="Text" DisplayName="Text file" ItemType="None" />
+  <ContentType Name="XML" DisplayName="XML database" ItemType="Content" />
+  <ContentType Name="SQL" DisplayName="SQL database" ItemType="Content" />
+  <ContentType Name="Lua" DisplayName="Lua script" ItemType="Content" />
+  <ContentType Name="Content" DisplayName="Content" ItemType="Content" />
+
+  <ItemType Name="None" DisplayName="Does not participate in build"/>
+  <ItemType Name="Content" DisplayName="Content"/>
+
+  <FileExtension Name=".txt" ContentType="Text" />
+  <FileExtension Name=".xml" ContentType="XML" />
+  <FileExtension Name=".sql" ContentType="SQL" />
+  <FileExtension Name=".lua" ContentType="Lua" />
+</ProjectSchemaDefinitions>
