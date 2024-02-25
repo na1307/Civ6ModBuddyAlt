@@ -5,16 +5,42 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Civ6ModBuddyAlt", "Civ6ModBuddyAlt\Civ6ModBuddyAlt.csproj", "{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Civ6Project.ProjectTemplate", "Civ6Project.ProjectTemplate\Civ6Project.ProjectTemplate.csproj", "{CBCABBCA-0371-46AC-B735-22B7FDB053E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|arm64 = Debug|arm64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|arm64 = Release|arm64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Debug|arm64.ActiveCfg = Debug|arm64
+		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Debug|arm64.Build.0 = Debug|arm64
+		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Debug|x86.ActiveCfg = Debug|x86
+		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Debug|x86.Build.0 = Debug|x86
 		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Release|arm64.ActiveCfg = Release|arm64
+		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Release|arm64.Build.0 = Release|arm64
+		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Release|x86.ActiveCfg = Release|x86
+		{A77ACD8C-0FA4-4535-B497-E5331BCA4EBA}.Release|x86.Build.0 = Release|x86
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Debug|arm64.ActiveCfg = Debug|arm64
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Debug|arm64.Build.0 = Debug|arm64
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Debug|x86.ActiveCfg = Debug|x86
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Debug|x86.Build.0 = Debug|x86
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Release|arm64.ActiveCfg = Release|arm64
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Release|arm64.Build.0 = Release|arm64
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Release|x86.ActiveCfg = Release|x86
+		{CBCABBCA-0371-46AC-B735-22B7FDB053E5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
