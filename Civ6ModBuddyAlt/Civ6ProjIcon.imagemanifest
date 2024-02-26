@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImageManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                           xmlns="http://schemas.microsoft.com/VisualStudio/ImageManifestSchema/2014">
+  <Symbols>
+    <String Name="Resources" Value="/Civ6ModBuddyAlt;Component/" />
+    <Guid Name="Civ6ProjIconGuid" Value="7242e186-e6c8-4e0b-a8a0-ec9af195890c" />
+    <ID Name="ProjectIcon" Value="0" />
+  </Symbols>
+  <Images>
+    <Image Guid="$(Civ6ProjIconGuid)" ID="$(ProjectIcon)">
+      <Source Uri="$(Resources)/Images/Civ6ProjIconProjectIcon.xaml" />
+      <Source Uri="$(Resources)/Images/Civ6ProjIconProjectIcon.png" >
+        <Size Value="16" />
+      </Source>  
+    </Image>
+  </Images>
+  <ImageLists />
+</ImageManifest>
