@@ -17,8 +17,8 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="$safeprojectname$.Art.xml">Civ6Project.Art.xml</ProjectItem>
     </Project>
   </TemplateContent>
-  <!--<WizardExtension>
-    <Assembly>Civ6ModBuddyAlt, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5f7258823af0f1cc</Assembly>
-    <FullClassName>Civ6ModBuddyAlt.Projects.Wizards.BasicNewModWizard</FullClassName>
-  </WizardExtension>-->
+  <WizardExtension>
+    <Assembly>Civ6ModBuddyAlt, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5f7258823af0f1cc</Assembly>
+    <FullClassName>Civ6ModBuddyAlt.Wizards.BasicNewModWizard</FullClassName>
+  </WizardExtension>
 </VSTemplate>
