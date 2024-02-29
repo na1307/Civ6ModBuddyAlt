@@ -63,6 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Civ6ModBuddyAltPackage.cs" />
     <Compile Include="Wizards\BasicNewModWizard.cs" />
+    <Compile Include="Wizards\WizardViewModel.cs" />
     <Compile Include="Wizards\WizardWindow.xaml.cs">
       <DependentUpon>WizardWindow.xaml</DependentUpon>
     </Compile>
