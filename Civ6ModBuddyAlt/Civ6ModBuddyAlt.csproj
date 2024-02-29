@@ -45,20 +45,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Civ6PathOptionPage.cs">
+    <Compile Include="Options\PathOptionPage.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Civ6PathUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Civ6PathUserControl.Designer.cs">
-      <DependentUpon>Civ6PathUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Civ6ProjIconMonikers.cs" />
     <Compile Include="Civ6ProjIconProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Civ6ConfiguredProject.cs" />
     <Compile Include="Civ6UnconfiguredProject.cs" />
+    <Compile Include="Options\PathOptions.xaml.cs">
+      <DependentUpon>PathOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProjectProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Civ6ModBuddyAltPackage.cs" />
@@ -98,15 +95,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bluehill.CompilerServices" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" />
     <PackageReference Include="Microsoft.VisualStudio.SDK" ExcludeAssets="runtime" />
     <PackageReference Include="Microsoft.VisualStudio.Composition" />
     <PackageReference Include="Microsoft.VisualStudio.ProjectSystem.Sdk" />
     <PackageReference Include="Microsoft.VSSDK.BuildTools" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Civ6PathUserControl.resx">
-      <DependentUpon>Civ6PathUserControl.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="BuildSystem\Rules\ProjectItemsSchema.xaml" />
@@ -192,6 +185,10 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Options\PathOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Wizards\WizardWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

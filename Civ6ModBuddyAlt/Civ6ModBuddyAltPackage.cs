@@ -2,6 +2,7 @@
 global using Microsoft.VisualStudio.Shell;
 global using System;
 global using Task = System.Threading.Tasks.Task;
+using Civ6ModBuddyAlt.Options;
 using System.Runtime.InteropServices;
 using System.Threading;
 
@@ -25,7 +26,7 @@ namespace Civ6ModBuddyAlt;
 /// </para>
 /// </remarks>
 [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-[ProvideOptionPage(typeof(Civ6PathOptionPage), "Civilization VI", "Path", 0, 0, true)]
+[ProvideOptionPage(typeof(PathOptionPage), Civ6OptionsCategoryName, "Path", 0, 0, true)]
 [Guid(PackageGuidString)]
 public sealed class Civ6ModBuddyAltPackage : AsyncPackage {
     /// <summary>
@@ -60,12 +61,14 @@ public sealed class Civ6ModBuddyAltPackage : AsyncPackage {
 
     public const string ProjectTypeName = "Civ6ModProject";
 
+    public const string Civ6OptionsCategoryName = "Civilization VI";
+
     #region Package Members
 
-    public string UserPath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).UserPath;
-    public string GamePath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).GamePath;
-    public string ToolsPath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).ToolsPath;
-    public string AssetsPath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).AssetsPath;
+    public string UserPath => ((PathOptionPage)GetDialogPage(typeof(PathOptionPage))).UserPath;
+    public string GamePath => ((PathOptionPage)GetDialogPage(typeof(PathOptionPage))).GamePath;
+    public string ToolsPath => ((PathOptionPage)GetDialogPage(typeof(PathOptionPage))).ToolsPath;
+    public string AssetsPath => ((PathOptionPage)GetDialogPage(typeof(PathOptionPage))).AssetsPath;
 
     /// <summary>
     /// Initialization of the package; this method is called right after the package is sited, so this is the place

@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Civ6ModBuddyAlt.Options.PathOptions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Civ6ModBuddyAlt.Options"
+             mc:Ignorable="d"
+             Width="450" Height="350">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Civilization VI User Path:" Grid.Row="0" />
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="20" Margin="0,31,0,0" Grid.Row="0">
+            <TextBox x:Name="UserPathBox" Text="{Binding Path=UserPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="400" Margin="10,0,0,0" TextWrapping="NoWrap" />
+            <Button x:Name="UserPathButton" Content="..." VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Margin="5,0,0,0" Click="UserPathButton_Click" />
+        </StackPanel>
+        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Civilization VI Game Path:" Grid.Row="1" />
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="20" Margin="0,31,0,0" Grid.Row="1">
+            <TextBox x:Name="GamePathBox" Text="{Binding Path=GamePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="400" Margin="10,0,0,0" TextWrapping="NoWrap" />
+            <Button x:Name="GamePathButton" Content="..." VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Margin="5,0,0,0" Click="GamePathButton_Click" />
+        </StackPanel>
+        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Civilization VI SDK Path:" Grid.Row="2" />
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="20" Margin="0,31,0,0" Grid.Row="2">
+            <TextBox x:Name="ToolsPathBox" Text="{Binding Path=ToolsPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="400" Margin="10,0,0,0" TextWrapping="NoWrap" />
+            <Button x:Name="ToolsPathButton" Content="..." VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Margin="5,0,0,0" Click="ToolsPathButton_Click" />
+        </StackPanel>
+        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Civilization VI SDK Assets Path:" Grid.Row="3" />
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="20" Margin="0,31,0,0" Grid.Row="3">
+            <TextBox x:Name="AssetsPathBox" Text="{Binding Path=AssetsPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="400" Margin="10,0,0,0" TextWrapping="NoWrap" />
+            <Button x:Name="AssetsPathButton" Content="..." VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Margin="5,0,0,0" Click="AssetsPathButton_Click" />
+        </StackPanel>
+        <Button x:Name="ResetButton" Content="Reset" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" Height="25" Margin="10,0,0,0" Grid.Row="4" Click="ResetButton_Click"/>
+    </Grid>
+</UserControl>

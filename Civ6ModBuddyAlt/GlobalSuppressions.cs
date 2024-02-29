@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<보류 중>", Scope = "member", Target = "~M:Civ6ModBuddyAlt.Civ6PathOptionPage.getSteamPath(System.String)~System.String")]
+[assembly: SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<보류 중>", Scope = "member", Target = "~M:Civ6ModBuddyAlt.Options.PathOptionPage.getSteamPath(System.String)~System.String")]

@@ -1,15 +1,19 @@
-﻿using System.IO;
+﻿using System.ComponentModel;
+using System.IO;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
+using System.Windows;
 
-namespace Civ6ModBuddyAlt;
+namespace Civ6ModBuddyAlt.Options;
 
 [Guid("e22a0d36-d176-4c82-a3de-407e0b1ab4df")]
-public sealed class Civ6PathOptionPage : DialogPage {
+public sealed class PathOptionPage : UIElementDialogPage, INotifyPropertyChanged {
     private string userPath = string.Empty;
     private string gamePath = string.Empty;
     private string toolsPath = string.Empty;
     private string assetsPath = string.Empty;
+
+    public event PropertyChangedEventHandler PropertyChanged;
 
     public string UserPath {
         get {
@@ -19,7 +23,7 @@ public sealed class Civ6PathOptionPage : DialogPage {
 
             return userPath;
         }
-        set => userPath = value;
+        set => setProperty(ref userPath, value);
     }
 
     public string GamePath {
@@ -30,7 +34,7 @@ public sealed class Civ6PathOptionPage : DialogPage {
 
             return gamePath;
         }
-        set => gamePath = value;
+        set => setProperty(ref gamePath, value);
     }
 
     public string ToolsPath {
@@ -41,7 +45,7 @@ public sealed class Civ6PathOptionPage : DialogPage {
 
             return toolsPath;
         }
-        set => toolsPath = value;
+        set => setProperty(ref toolsPath, value);
     }
 
     public string AssetsPath {
@@ -52,10 +56,10 @@ public sealed class Civ6PathOptionPage : DialogPage {
 
             return assetsPath;
         }
-        set => assetsPath = value;
+        set => setProperty(ref assetsPath, value);
     }
 
-    protected override IWin32Window Window => new Civ6PathUserControl(this);
+    protected override UIElement Child => new PathOptions(this);
 
     private static string getSteamPath(string dirName) {
         if (Directory.Exists(@"C:\Program Files (x86)\Steam\steamapps\common\" + dirName)) {
@@ -67,5 +71,15 @@ public sealed class Civ6PathOptionPage : DialogPage {
         }
 
         return Array.Find(Directory.GetLogicalDrives(), dl => Directory.Exists(dl + @"SteamLibrary\steamapps\common\" + dirName)) + @"SteamLibrary\steamapps\common\" + dirName;
+    }
+
+    private bool setProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null) {
+        if (!Equals(field, newValue)) {
+            field = newValue;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return true;
+        }
+
+        return false;
     }
 }
