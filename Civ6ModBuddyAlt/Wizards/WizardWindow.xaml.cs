@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 
 namespace Civ6ModBuddyAlt.Wizards;
 
@@ -12,12 +13,30 @@ public sealed partial class WizardWindow {
         InitializeComponent();
         viewModel = new();
         DataContext = viewModel;
+        TitleBox.Text = "Mod Title";
+        DescriptionBox.Text = "The description of the mod.";
     }
 
     public string ModTitle => viewModel.ModTitle;
     public string ModAuthors => viewModel.ModAuthors;
     public string ModSpecialThanks => viewModel.ModSpecialThanks;
     public string ModDescription => viewModel.ModDescription;
+
+    protected override void OnClosing(CancelEventArgs e) {
+        base.OnClosing(e);
+
+        if (DialogResult.GetValueOrDefault() && !isValid()) {
+            e.Cancel = true;
+        }
+    }
+
+    private bool isValid() {
+        StringLengthRule titleLenghtRule = new() { MinLength = 8, MaxLength = 256 };
+        StringNotBeEmptyRule authorsRule = new();
+        StringLengthRule descLenghtRule = new() { MinLength = 8, MaxLength = 1024 };
+
+        return titleLenghtRule.Validate(TitleBox.Text, null).IsValid && authorsRule.Validate(AuthorsBox.Text, null).IsValid && descLenghtRule.Validate(DescriptionBox.Text, null).IsValid;
+    }
 
     private void OKButton_Click(object sender, RoutedEventArgs e) => DialogResult = true;
     private void CancelButton_Click(object sender, RoutedEventArgs e) => DialogResult = false;

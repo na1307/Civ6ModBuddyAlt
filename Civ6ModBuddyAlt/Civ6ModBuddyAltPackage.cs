@@ -60,18 +60,6 @@ public sealed class Civ6ModBuddyAltPackage : AsyncPackage {
 
     public const string ProjectTypeName = "Civ6ModProject";
 
-    public const string PropertyCannotBeEmpty = "{0} cannot be empty.";
-
-    public const string PropertyMustBeAtLeastXLength = "{0} must be at least {1} characters long.";
-
-    public const string PropertyMustBeAtMaxXLength = "{0} can be no longer than {1} characters long.";
-
-    public const string DefaultModName = "My Custom Mod";
-
-    public const string DefaultModDescription = "This is a brief description of the mod.";
-
-    public const string WizardCaption = "Create a new mod - {0} of {1}";
-
     #region Package Members
 
     public string UserPath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).UserPath;
