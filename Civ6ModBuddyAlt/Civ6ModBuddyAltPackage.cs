@@ -3,6 +3,7 @@ global using Microsoft.VisualStudio.Shell;
 global using System;
 global using Task = System.Threading.Tasks.Task;
 using Civ6ModBuddyAlt.Options;
+using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
 using System.Threading;
 
@@ -26,7 +27,10 @@ namespace Civ6ModBuddyAlt;
 /// </para>
 /// </remarks>
 [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
+[ProvideOptionPage(typeof(NameOptionPage), Civ6OptionsCategoryName, "Name", 0, 0, true)]
 [ProvideOptionPage(typeof(PathOptionPage), Civ6OptionsCategoryName, "Path", 0, 0, true)]
+[ProvideProfile(typeof(NameOptionPage), Civ6OptionsCategoryName, "Name", 106, 107, true, DescriptionResourceID = 108)]
+[ProvideService(typeof(Civ6ProjectShellSettings), ServiceName = "Civilization VI Project Settings")]
 [Guid(PackageGuidString)]
 public sealed class Civ6ModBuddyAltPackage : AsyncPackage {
     /// <summary>
@@ -65,11 +69,6 @@ public sealed class Civ6ModBuddyAltPackage : AsyncPackage {
 
     #region Package Members
 
-    public string UserPath => ((PathOptionPage)GetDialogPage(typeof(PathOptionPage))).UserPath;
-    public string GamePath => ((PathOptionPage)GetDialogPage(typeof(PathOptionPage))).GamePath;
-    public string ToolsPath => ((PathOptionPage)GetDialogPage(typeof(PathOptionPage))).ToolsPath;
-    public string AssetsPath => ((PathOptionPage)GetDialogPage(typeof(PathOptionPage))).AssetsPath;
-
     /// <summary>
     /// Initialization of the package; this method is called right after the package is sited, so this is the place
     /// where you can put all the initialization code that rely on services provided by VisualStudio.
@@ -78,10 +77,15 @@ public sealed class Civ6ModBuddyAltPackage : AsyncPackage {
     /// <param name="progress">A provider for progress updates.</param>
     /// <returns>A task representing the async work of package initialization, or an already completed task if there is none. Do not return null from this method.</returns>
     protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress) {
+        addService(new Civ6ProjectShellSettings(this));
+
         // When initialized asynchronously, the current thread may be a background thread at this point.
         // Do any initialization that requires the UI thread after switching to the UI thread.
         await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
     }
+
+    public T GetDialogPage<T>() where T : DialogPage => (T)GetDialogPage(typeof(T));
+    private void addService<T>(T serviceInstance) => ((IServiceContainer)this).AddService(typeof(T), serviceInstance, true);
 
     #endregion
 }

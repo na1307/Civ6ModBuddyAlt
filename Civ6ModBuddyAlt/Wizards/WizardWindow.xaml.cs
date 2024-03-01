@@ -7,6 +7,7 @@ namespace Civ6ModBuddyAlt.Wizards;
 /// WizardWindow.xaml에 대한 상호 작용 논리
 /// </summary>
 public sealed partial class WizardWindow {
+    private static readonly Civ6ProjectShellSettings projectSettings = (Civ6ProjectShellSettings)Package.GetGlobalService(typeof(Civ6ProjectShellSettings));
     private readonly WizardViewModel viewModel;
 
     public WizardWindow() {
@@ -14,6 +15,7 @@ public sealed partial class WizardWindow {
         viewModel = new();
         DataContext = viewModel;
         TitleBox.Text = "Mod Title";
+        AuthorsBox.Text = projectSettings.Authors;
         DescriptionBox.Text = "The description of the mod.";
     }
 
