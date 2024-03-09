@@ -207,7 +207,6 @@
       Description="$(Description)"
       Authors="$(Authors)"
       SpecialThanks="$(SpecialThanks)"
-      Homepage="$(Homepage)"
       AffectsSavedGames ="$(AffectsSavedGames)"
       SupportsSinglePlayer="$(SupportsSinglePlayer)"
       SupportsMultiplayer="$(SupportsMultiplayer)"
