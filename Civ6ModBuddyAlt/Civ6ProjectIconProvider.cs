@@ -7,7 +7,7 @@ namespace Civ6ModBuddyAlt;
 /// </summary>
 [Export(typeof(IProjectTreePropertiesProvider))]
 [AppliesTo(Civ6UnconfiguredProject.UniqueCapability)]
-internal class Civ6ProjIconProvider : IProjectTreePropertiesProvider {
+internal class Civ6ProjectIconProvider : IProjectTreePropertiesProvider {
     /// <summary>
     /// Calculates new property values for each node in the project tree.
     /// </summary>
@@ -17,7 +17,7 @@ internal class Civ6ProjIconProvider : IProjectTreePropertiesProvider {
         // Only set the icon for the root project node.  We could choose to set different icons for nodes based
         // on various criteria, not just Capabilities, if we wished.
         if (propertyValues.Flags.Contains(ProjectTreeFlags.Common.ProjectRoot)) {
-            propertyValues.Icon = Civ6ProjIconMonikers.ProjectIconImageMoniker.ToProjectSystemType();
+            propertyValues.Icon = Civ6ProjectIconMonikers.ProjectIconImageMoniker.ToProjectSystemType();
         }
     }
 }

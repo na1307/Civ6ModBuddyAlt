@@ -52,8 +52,8 @@
     <Compile Include="Options\PathOptionPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Civ6ProjIconMonikers.cs" />
-    <Compile Include="Civ6ProjIconProvider.cs" />
+    <Compile Include="Civ6ProjectIconMonikers.cs" />
+    <Compile Include="Civ6ProjectIconProvider.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Civ6ConfiguredProject.cs" />
     <Compile Include="Civ6UnconfiguredProject.cs" />
@@ -81,10 +81,10 @@
       <IncludeInVSIX>true</IncludeInVSIX>
       <InstallRoot>MSBuild</InstallRoot>
     </Content>
-    <Content Include="Civ6ProjIcon.imagemanifest">
+    <Content Include="Civ6ProjectIcon.imagemanifest">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Resource Include="Images\Civ6ProjIconProjectIcon.png" />
+    <Resource Include="Images\Civ6ProjectIcon.png" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -188,7 +188,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Civ6ProjIconProjectIcon.xaml">
+    <Resource Include="Images\Civ6ProjectIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
