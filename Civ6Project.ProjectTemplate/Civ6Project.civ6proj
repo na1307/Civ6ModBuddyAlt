@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Default">
+<Project DefaultTargets="Default">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
     <Name>$Name$</Name>
     <Guid>$guid1$</Guid>
     <ProjectGuid>$guid2$</ProjectGuid>
@@ -15,9 +14,6 @@
     <SupportsMultiplayer>true</SupportsMultiplayer>
     <SupportsHotSeat>true</SupportsHotSeat>
     <CompatibleVersions>2.0</CompatibleVersions>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Default' ">
-    <OutputPath>.</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <None Include="$safeprojectname$.Art.xml"/>

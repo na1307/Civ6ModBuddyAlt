@@ -1,0 +1,227 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Default|Civ6">
+      <Configuration>Default</Configuration>
+      <Platform>Civ6</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+
+  <!-- Capabilities for this project.  Conditions should be based on platform|configuration only. -->
+  <ItemGroup>
+    <ProjectCapability Include="Civ6ModProject" />
+    <ProjectCapability Include="UseFileGlobs" />
+    <ProjectCapability Include="OpenProjectFile" />
+    <ProjectCapability Include="HandlesOwnReload" />
+    <ProjectCapability Include="ProjectConfigurationsDeclaredAsItems" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)Rules\ProjectItemsSchema.xaml;">
+      <Context>Project</Context>
+    </PropertyPageSchema>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)Rules\general.xaml;">
+      <Context>Project</Context>
+    </PropertyPageSchema>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)Rules\general_file.xaml">
+      <Context>File</Context>
+    </PropertyPageSchema>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)Rules\general.browseobject.xaml">
+      <Context>BrowseObject</Context>
+    </PropertyPageSchema>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)Rules\folder.xaml;$(MSBuildThisFileDirectory)Rules\none.xaml;$(MSBuildThisFileDirectory)Rules\content.xaml;">
+      <Context>File;BrowseObject</Context>
+    </PropertyPageSchema>
+  </ItemGroup>
+
+  <UsingTask TaskName="Civ6ModBuddyAlt.Tasks.GenerateModInfo"
+          AssemblyFile="$(MSBuildExtensionsPath)\Civ6ModBuddyAlt\Civ6ModBuddyAlt.Tasks.dll" />
+  <UsingTask TaskName="Civ6ModBuddyAlt.Tasks.GeneratePantryPaths"
+      AssemblyFile="$(MSBuildExtensionsPath)\Civ6ModBuddyAlt\Civ6ModBuddyAlt.Tasks.dll" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Civ6</Platform>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <StartAction>Program</StartAction>
+    <StartProgram>start steam://rungameid/289070</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Default|Civ6' ">
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ProjectDir Condition="'$(BuildPath)'==''">$(MSBuildProjectDirectory)</ProjectDir>
+    <ModsDir>$([System.IO.Path]::Combine($(Civ6_UserPath),Mods))</ModsDir>
+    <OutputDir>$([System.IO.Path]::Combine($(ModsDir),$(MSBuildProjectName)))</OutputDir>
+    <BuildDir>$(OutputDir)</BuildDir>
+    <ModInfoPath>$([System.IO.Path]::Combine($(BuildDir),$(MSBuildProjectName).modinfo))</ModInfoPath>
+  </PropertyGroup>
+
+  <Target Name="GetFrameworkPaths" />
+
+  <Target Name="_CheckProperties">
+    <Error Text="Civilization VI User Path must be defined. Use the Project Properties window to set it to the location where Civilization VI Mods are installed."
+         Condition="('$(Civ6_UserPath)' == '')" />
+  </Target>
+
+  <Target Name="Clean" DependsOnTargets="_CheckProperties">
+    <Message Text="Cleaning Mod project..." />
+    <RemoveDir Directories="$(BuildDir);$(OutputDir)" />
+  </Target>
+
+  <Target Name="ReBuild" DependsOnTargets="_CheckProperties">
+    <Message Text="Rebuilding Mod project..." />
+    <CallTarget Targets="Clean" />
+    <CallTarget Targets="Default" />
+  </Target>
+
+  <!-- Determine if there is a suitable *.Art.xml file located in the project.  If so, cook. -->
+  <Target Name="CheckCookAssets">
+    <ItemGroup>
+      <ProjectArtXmls Include="*.Art.xml"/>
+    </ItemGroup>
+    <Message Text="@(ProjectArtXmls->Count())" />
+    <Error Text="There are too many art xml files in the project.  There should only be 1."
+         Condition="'@(ProjectArtXmls->Count())' &gt; 1" />
+
+    <PropertyGroup Condition="'@(ProjectArtXmls->Count())' == 1">
+      <ProjectArtXml>%(ProjectArtXmls.Identity)</ProjectArtXml>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ArtDefFiles Include="ArtDefs/*.artdef" />
+      <XLPFiles Include="XLPs/*.XLP" />
+    </ItemGroup>
+
+    <Message Text="No art xml found in project, skipping cook process." Condition="$(ProjectArtXml) == ''" />
+    <Message Text="No artdef or xlp files found in project, skipping cook process." Condition="$(ProjectArtXml) != '' and '@(ArtDefFiles)' == '' and '@(XLPFiles)' == ''" />
+
+    <CallTarget Targets="CookAssets" Condition="$(ProjectArtXml) != '' and Exists($(ProjectArtXml)) and ('@(ArtDefFiles)' != '' or '@(XLPFiles)' != '')"/>
+  </Target>
+
+  <!-- Cook art assets. -->
+  <Target Name="CookAssets">
+    <Message Text="Cooking Assets" />
+
+    <PropertyGroup>
+      <CookerDir>$([System.IO.Path]::GetDirectoryName($(Civ6_CookerPath)))</CookerDir>
+      <CookerBin>$(Civ6_CookerPath)</CookerBin>
+      <CookerShadersDir>$(CookerDir)</CookerShadersDir>
+      <CookerConfig>$(CookerDir)\Civ6.cfg</CookerConfig>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectArtXmls Include="*.Art.xml"/>
+    </ItemGroup>
+    <Message Text="@(ProjectArtXmls->Count())" />
+    <Error Text="There are too many art xml files in the project.  There should only be 1."
+         Condition="'@(ProjectArtXmls->Count())' &gt; 1" />
+
+    <PropertyGroup Condition="'@(ProjectArtXmls->Count())' == 1">
+      <ProjectArtXml>%(ProjectArtXmls.Identity)</ProjectArtXml>
+    </PropertyGroup>
+    <Message Text="Mod Art - $(ProjectArtXml)" />
+
+    <ItemGroup>
+      <ArtDefFiles Include="ArtDefs/*.artdef" />
+      <XLPFiles Include="XLPs/*.XLP" />
+    </ItemGroup>
+
+    <Message Text="Cooker Path - $(Civ6_CookerPath)" />
+
+    <Error Text="Cannot find the asset cooker.  This is required since the mod includes art assets."
+         Condition="(!Exists($(CookerBin)) And (@(ArtDefFiles) != '' or @(XLPFiles) != ''))" />
+
+    <Message Text="Develpment Assets Path - $(Civ6_AssetsPath)" Condition="$(Civ6_AssetsPath) != ''"/>
+
+    <GeneratePantryPaths AssetsPath="$(Civ6_AssetsPath)" ArtXmlPath="$(ProjectArtXml)">
+      <Output TaskParameter="PantryPath" PropertyName="PantryPath"/>
+    </GeneratePantryPaths>
+
+    <Message Text="Art Pantry Path - $(PantryPath)" Condition="'$(PantryPath)' != ''"/>
+
+    <!-- Command lines when there is no base pantry -->
+    <PropertyGroup Condition="'$(PantryPath)' == ''">
+      <ArtDefCookerCmd>"$(CookerBin)" --absolute_paths --no_mt --mode ArtDef --platform Windows --shaders "$(CookerShadersDir)" --pantry "$(ProjectDir)" --banquet_hall "$(BuildDir)\ArtDefs" --config "$(CookerConfig)"</ArtDefCookerCmd>
+      <XLPCookerCmdWindows>"$(CookerBin)" --absolute_paths --no_mt --mode XLP --platform Windows --shaders "$(CookerShadersDir)" --pantry "$(ProjectDir)" --stewpot "$(BuildDir)\Platforms\Windows\BLPs" --config "$(CookerConfig)"</XLPCookerCmdWindows>
+      <XLPCookerCmdMacOS>"$(CookerBin)" --absolute_paths --no_mt --mode XLP --platform MacOS --shaders "$(CookerShadersDir)" --pantry "$(ProjectDir)" --stewpot "$(BuildDir)\Platforms\MacOS\BLPs" --config "$(CookerConfig)"</XLPCookerCmdMacOS>
+    </PropertyGroup>
+
+    <!-- Command lines when there is a base pantry -->
+    <PropertyGroup Condition="'$(PantryPath)' != ''">
+      <ArtDefCookerCmd>"$(CookerBin)" --absolute_paths --no_mt --mode ArtDef --platform Windows --shaders "$(CookerShadersDir)" --pantry "$(ProjectDir)" $(PantryPath) --banquet_hall "$(BuildDir)\ArtDefs" --config "$(CookerConfig)"</ArtDefCookerCmd>
+      <XLPCookerCmdWindows>"$(CookerBin)" --absolute_paths --no_mt --mode XLP --platform Windows --shaders "$(CookerShadersDir)" --pantry "$(ProjectDir)" $(PantryPath) --stewpot "$(BuildDir)\Platforms\Windows\BLPs" --config "$(CookerConfig)"</XLPCookerCmdWindows>
+      <XLPCookerCmdMacOS>"$(CookerBin)" --absolute_paths --no_mt --mode XLP --platform MacOS --shaders "$(CookerShadersDir)" --pantry "$(ProjectDir)" $(PantryPath) --stewpot "$(BuildDir)\Platforms\MacOS\BLPs" --config "$(CookerConfig)"</XLPCookerCmdMacOS>
+    </PropertyGroup>
+
+    <Message Text="Cooking ArtDef files" Condition="@(ArtDefFiles) != ''"/>
+    <Exec Command="$(ArtDefCookerCmd) &quot;%(ArtDefFiles.FullPath)&quot;" ConsoleToMsBuild="true" IgnoreExitCode="true" Condition="@(ArtDefFiles) != ''"/>
+
+    <Message Text="Cooking XLP files" Condition="@(XLPFiles) != ''"/>
+    <Exec Command="$(XLPCookerCmdWindows) &quot;%(XLPFiles.FullPath)&quot;" ConsoleToMsBuild="true" IgnoreExitCode="true" Condition="@(XLPFiles) != ''" />
+    <Exec Command="$(XLPCookerCmdMacOS) &quot;%(XLPFiles.FullPath)&quot;" ConsoleToMsBuild="true" IgnoreExitCode="true" Condition="@(XLPFiles) != ''" />
+  </Target>
+
+
+  <Target Name="Build" DependsOnTargets="Clean">
+
+    <Message Text="$(Civ6_CookerPath)" />
+    <Message Text="$(Civ6_UserPath)" />
+    <Message Text="$(Civ6_GamePath)" />
+    <Message Text="$(Civ6_AssetsPath)" />
+
+    <Message Text="Building Mod..." />
+    <ItemGroup>
+      <_ModFiles Include="@(Content)">
+        <TargetPath>$([System.IO.Path]::Combine($(BuildDir),%(Content.Identity)))</TargetPath>
+        <TargetDir>$([System.IO.Path]::Combine($(BuildDir),%(Content.RelativeDir)))</TargetDir>
+      </_ModFiles>
+    </ItemGroup>
+
+    <Message Text="Creating target folder structure..." />
+    <MakeDir Directories="$(BuildDir)" Condition = "!Exists('$(BuildDir)')"/>
+    <MakeDir Directories="%(_ModFiles.TargetDir)" Condition = "!Exists('%(_ModFiles.TargetDir)')"/>
+
+    <!-- Copy files to output folder -->
+    <Message Text="Copying files..." />
+    <Copy SourceFiles="@(_ModFiles)" SkipUnchangedFiles="true" DestinationFiles="%(_ModFiles.TargetPath)">
+      <Output TaskParameter="CopiedFiles" ItemName="_CopiedFiles" />
+    </Copy>
+
+    <CallTarget Targets="CheckCookAssets" />
+
+    <!-- Build list of final mod files (including generated art assets)-->
+    <ItemGroup>
+      <ModFiles Include="$(BuildDir)\**\*" />
+    </ItemGroup>
+    <Message Text="%(ModFiles.Identity)"/>
+
+    <!-- Generate modinfo file -->
+    <Message Text="Generating .modinfo file" />
+    <GenerateModInfo
+      ID="$(Guid)"
+      Version="$(ModVersion)"
+      Name="$(Name)"
+      Teaser="$(Teaser)"
+      Description="$(Description)"
+      Authors="$(Authors)"
+      SpecialThanks="$(SpecialThanks)"
+      AffectsSavedGames ="$(AffectsSavedGames)"
+      SupportsSinglePlayer="$(SupportsSinglePlayer)"
+      SupportsMultiplayer="$(SupportsMultiplayer)"
+      SupportsHotSeat="$(SupportsHotSeat)"
+      CompatibleVersions="$(CompatibleVersions)"
+      CustomProperties ="$(ModProperties)"
+      ActionCriteriaData ="$(ActionCriteriaData)"
+      LocalizedTextData ="$(LocalizedTextData)"
+      FrontEndActionData ="$(FrontEndActionData)"
+      InGameActionData ="$(InGameActionData)"
+      AssociationData ="$(AssociationData)"
+      Files="@(ModFiles)"
+      TargetPath="$(ModInfoPath)"/>
+  </Target>
+  <Target Name="Default" DependsOnTargets="Build">
+
+  </Target>
+</Project>

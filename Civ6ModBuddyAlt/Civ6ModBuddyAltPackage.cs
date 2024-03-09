@@ -1,9 +1,11 @@
-﻿using Civ6ModBuddyAlt.Projects;
-using Civ6ModBuddyAlt.Projects.Properties;
-using Microsoft.VisualStudio.Project;
-using Microsoft.VisualStudio.Shell;
+﻿global using Microsoft.VisualStudio.ProjectSystem;
+global using Microsoft.VisualStudio.Shell;
+global using System;
+global using Task = System.Threading.Tasks.Task;
+using Civ6ModBuddyAlt.Options;
 using System.ComponentModel.Design;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Civ6ModBuddyAlt;
 
@@ -24,18 +26,13 @@ namespace Civ6ModBuddyAlt;
 /// To get loaded into VS, the package must be referred by &lt;Asset Type="Microsoft.VisualStudio.VsPackage" ...&gt; in .vsixmanifest file.
 /// </para>
 /// </remarks>
-[PackageRegistration(UseManagedResourcesOnly = true)]
-[InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
-[ProvideMenuResource("Menus.ctmenu", 1)]
-[ProvideOptionPage(typeof(Civ6PathOptionPage), "Civilization VI", "Path", 0, 0, true)]
-[ProvideProjectFactory(typeof(Civ6ProjectFactory), "Civilization VI", "Civilization VI Project Files (*.civ6proj);*.civ6proj", "civ6proj", "civ6proj", null, LanguageVsTemplate = ProjectTypeName)]
-[ProvideObject(typeof(InfoSettingsPage), RegisterUsing = RegistrationMethod.CodeBase)]
-[ProvideObject(typeof(AssociationsSettingsPage), RegisterUsing = RegistrationMethod.CodeBase)]
-[ProvideObject(typeof(FrontEndActionsSettingsPage), RegisterUsing = RegistrationMethod.CodeBase)]
-[ProvideObject(typeof(InGameActionsSettingsPage), RegisterUsing = RegistrationMethod.CodeBase)]
+[PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
+[ProvideOptionPage(typeof(NameOptionPage), Civ6OptionsCategoryName, "Name", 0, 0, true)]
+[ProvideOptionPage(typeof(PathOptionPage), Civ6OptionsCategoryName, "Path", 0, 0, true)]
+[ProvideProfile(typeof(NameOptionPage), Civ6OptionsCategoryName, "Name", 106, 107, true, DescriptionResourceID = 108)]
 [ProvideService(typeof(Civ6ProjectShellSettings), ServiceName = "Civilization VI Project Settings")]
 [Guid(PackageGuidString)]
-public sealed class Civ6ModBuddyAltPackage : ProjectPackage {
+public sealed class Civ6ModBuddyAltPackage : AsyncPackage {
     /// <summary>
     /// Civ6ModBuddyAltPackage GUID string.
     /// </summary>
@@ -68,35 +65,27 @@ public sealed class Civ6ModBuddyAltPackage : ProjectPackage {
 
     public const string ProjectTypeName = "Civ6ModProject";
 
-    public const string PropertyCannotBeEmpty = "{0} cannot be empty.";
-
-    public const string PropertyMustBeAtLeastXLength = "{0} must be at least {1} characters long.";
-
-    public const string PropertyMustBeAtMaxXLength = "{0} can be no longer than {1} characters long.";
-
-    public const string DefaultModName = "My Custom Mod";
-
-    public const string DefaultModDescription = "This is a brief description of the mod.";
-
-    public const string WizardCaption = "Create a new mod - {0} of {1}";
+    public const string Civ6OptionsCategoryName = "Civilization VI";
 
     #region Package Members
 
-    public string UserPath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).UserPath;
-    public string GamePath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).GamePath;
-    public string ToolsPath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).ToolsPath;
-    public string AssetsPath => ((Civ6PathOptionPage)GetDialogPage(typeof(Civ6PathOptionPage))).AssetsPath;
-    public override string ProductUserContext => ProjectTypeName;
+    /// <summary>
+    /// Initialization of the package; this method is called right after the package is sited, so this is the place
+    /// where you can put all the initialization code that rely on services provided by VisualStudio.
+    /// </summary>
+    /// <param name="cancellationToken">A cancellation token to monitor for initialization cancellation, which can occur when VS is shutting down.</param>
+    /// <param name="progress">A provider for progress updates.</param>
+    /// <returns>A task representing the async work of package initialization, or an already completed task if there is none. Do not return null from this method.</returns>
+    protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress) {
+        addService(new Civ6ProjectShellSettings(this));
 
-    public TDialogPage GetDialogPage<TDialogPage>() where TDialogPage : DialogPage => (TDialogPage)GetDialogPage(typeof(TDialogPage));
-
-    protected override void Initialize() {
-        base.Initialize();
-        RegisterProjectFactory(new Civ6ProjectFactory(this));
-        AddService(typeof(Civ6ProjectShellSettings), new Civ6ProjectShellSettings(this));
+        // When initialized asynchronously, the current thread may be a background thread at this point.
+        // Do any initialization that requires the UI thread after switching to the UI thread.
+        await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
     }
 
-    private void AddService(Type serviceType, object serviceInstance) => ((IServiceContainer)this).AddService(serviceType, serviceInstance, true);
+    public T GetDialogPage<T>() where T : DialogPage => (T)GetDialogPage(typeof(T));
+    private void addService<T>(T serviceInstance) => ((IServiceContainer)this).AddService(typeof(T), serviceInstance, true);
 
     #endregion
 }

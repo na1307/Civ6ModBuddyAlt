@@ -4,13 +4,12 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.VisualStudio.SDK" Version="17.9.37000" />
-    <PackageVersion Include="Microsoft.VisualStudio.TemplateWizardInterface" Version="17.5.33428.366" />
+    <PackageVersion Include="Microsoft.VisualStudio.Composition" Version="17.7.40" />
+    <PackageVersion Include="Microsoft.VisualStudio.ProjectSystem.Sdk" Version="17.2.402-pre" />
     <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="17.9.3168" />
     <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="17.9.5" />
     <PackageVersion Include="Extended.Wpf.Toolkit" Version="4.6.0" />
     <PackageVersion Include="Bluehill.CompilerServices" Version="1.1.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <GlobalPackageReference Include="VSIX-SdkProjectAdapter" Version="3.0.0" />
+    <PackageVersion Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
   </ItemGroup>
 </Project>
